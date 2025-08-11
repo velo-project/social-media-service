@@ -1,0 +1,11 @@
+package com.github.veloproject.socialmediaservices.domain.entities;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
+public class UserEntity {
+}
