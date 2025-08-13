@@ -62,4 +62,15 @@ public class UsersTable {
             name = "registered_at"
     )
     private LocalDateTime registeredAt;
+
+    public UsersTable(Integer id, String name, String nickname, String bannerPhotoUrl, String profilePhotoUrl, Boolean isBlocked, Boolean isDeleted, LocalDateTime registeredAt) {
+        this.id = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.bannerPhotoUrl = bannerPhotoUrl;
+        this.profilePhotoUrl = profilePhotoUrl;
+        this.isBlocked = isBlocked;
+        this.isDeleted = isDeleted;
+        this.registeredAt = registeredAt;
+    }
 }

@@ -68,4 +68,13 @@ public class PostsTable {
             updatable = false
     )
     private LocalDateTime postedAt;
+
+    public PostsTable(Integer id, String content, UsersTable postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags, LocalDateTime postedAt) {
+        this.id = id;
+        this.content = content;
+        this.postedBy = postedBy;
+        this.postedIn = postedIn;
+        this.hashtags = hashtags;
+        this.postedAt = postedAt;
+    }
 }
