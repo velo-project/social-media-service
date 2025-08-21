@@ -16,8 +16,7 @@ public class PostMapper {
                 e.getContent(),
                 postedByMapped,
                 null,
-                null, // Possível problema de rollback?
-                e.getPostedAt()
+                null // Possível problema de rollback com projeto em produção?
         );
     }
 
