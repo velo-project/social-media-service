@@ -3,6 +3,7 @@ package com.github.veloproject.socialmediaservices.presentation.controllers.post
 import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommand;
 import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class PublishPostController {
     // TODO Configurar Spring Security
     // TODO Lombok @Valid
     @PostMapping("/publish")
-    public ResponseEntity<PublishPostCommandResult> publishPost(@RequestBody PublishPostCommand command,
+    public ResponseEntity<PublishPostCommandResult> publishPost(@RequestBody @Valid PublishPostCommand command,
                                                                 JwtAuthenticationToken token) {
         var response = mediator.send(command);
 
