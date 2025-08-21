@@ -46,4 +46,12 @@ public class CommunitiesTable {
             updatable = false
     )
     private LocalDateTime createdAt;
+
+    public CommunitiesTable(Integer id, String name, String description, UsersTable createdBy, LocalDateTime createdAt) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.createdBy = createdBy;
+        this.createdAt = createdAt;
+    }
 }
