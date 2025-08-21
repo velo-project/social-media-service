@@ -25,7 +25,8 @@ public class PostsTable {
 
     @Column(
             name = "content_post",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
     )
     private String content;
 
@@ -69,12 +70,11 @@ public class PostsTable {
     )
     private LocalDateTime postedAt;
 
-    public PostsTable(Integer id, String content, UsersTable postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags, LocalDateTime postedAt) {
+    public PostsTable(Integer id, String content, UsersTable postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags) {
         this.id = id;
         this.content = content;
         this.postedBy = postedBy;
         this.postedIn = postedIn;
         this.hashtags = hashtags;
-        this.postedAt = postedAt;
     }
 }
