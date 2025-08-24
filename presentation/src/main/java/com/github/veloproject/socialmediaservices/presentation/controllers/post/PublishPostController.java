@@ -21,11 +21,11 @@ public class PublishPostController {
     }
 
     // TODO Configurar Spring Security
-    // TODO Lombok @Valid
-    @PostMapping("/publish")
-    public ResponseEntity<PublishPostCommandResult> publishPost(@RequestBody @Valid PublishPostCommand command,
-                                                                JwtAuthenticationToken token) {
-        var response = mediator.send(command);
+    @PostMapping
+    public ResponseEntity<PublishPostCommandResult> publishPost(
+            @RequestBody @Valid PublishPostCommand command,
+            JwtAuthenticationToken token) {
+        var response = mediator.send(command, token);
 
         return ResponseEntity
                 .status(response.getStatusCode())
