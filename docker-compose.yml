@@ -25,11 +25,15 @@ services:
     depends_on:
       - db
     environment:
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
+      POSTGRES_HOST: db:5432
       POSTGRES_DATABASE: social-media-services
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: root
+      RSA_PUBLIC_KEY: /app/keys/app.pub
+      RSA_PRIVATE_KEY: /app/keys/app.key
+      USERS_API_URL: nginx-proxy:8080/api/user_services
+    volumes:
+      - /home/jpaveiro/Documentos/velo-conf:/app/keys:ro # ro = Read Only
 
   nginx:
     image: nginx:alpine
