@@ -20,4 +20,10 @@ public abstract class Response {
         this.message = message;
         this.timestamp = LocalDateTime.now();
     }
+
+    public Response(Integer statusCode) {
+        this.statusCode = statusCode;
+        this.message = null;
+        this.timestamp = LocalDateTime.now();
+    }
 }
