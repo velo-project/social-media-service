@@ -14,3 +14,6 @@ jwt:
   private:
     key: file:${RSA_PRIVATE_KEY}
 
+api:
+  users:
+    url: ${USERS_API_URL}
