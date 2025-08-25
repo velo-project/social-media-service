@@ -31,15 +31,15 @@ services:
       POSTGRES_PASSWORD: root
       RSA_PUBLIC_KEY: /app/keys/app.pub
       RSA_PRIVATE_KEY: /app/keys/app.key
-      USERS_API_URL: nginx-proxy:8080/api/user_services
+      USERS_API_URL: localhost:8080/api/user_services
     volumes:
-      - /home/jpaveiro/Documentos/velo-conf:/app/keys:ro # ro = Read Only
+      - C:\Users\joaop\OneDrive\Documentos\Velo\keys:/app/keys:ro # ro = Read Only
 
   nginx:
     image: nginx:alpine
-    container_name: nginx-proxy
+    container_name: sm_nginx
     ports:
-      - "8081:8081"
+      - "8081:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -57,3 +57,4 @@ networks:
 
 volumes:
   pgdata:
+    driver: local

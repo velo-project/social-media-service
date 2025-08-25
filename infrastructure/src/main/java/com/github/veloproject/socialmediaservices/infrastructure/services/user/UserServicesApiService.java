@@ -3,28 +3,22 @@ package com.github.veloproject.socialmediaservices.infrastructure.services.user;
 import com.github.veloproject.socialmediaservices.infrastructure.services.user.queries.SearchUserProfileQueryResultDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestClient;
 
 @Service
 public class UserServicesApiService {
-    @Value("${api.users.url}")
-    private String apiUsersUrl;
+    private final RestClient restClient;
 
-    private final WebClient webClient;
-
-    public UserServicesApiService(WebClient.Builder builder) {
-        this.webClient = builder.baseUrl(apiUsersUrl).build();
+    public UserServicesApiService(
+            RestClient.Builder builder,
+            @Value("${api.users.url}") String apiUsersUrl) {
+        this.restClient = builder.baseUrl(apiUsersUrl).build();
     }
 
-    // TODO getUserById Route
-    public Mono<SearchUserProfileQueryResultDto> getUserById(Integer id) {
-        return webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                            .path("search")
-                            .queryParam("id", id)
-                            .build())
+    public SearchUserProfileQueryResultDto getUserById(Integer id) {
+        return restClient.get()
+                .uri("/v2/search?id={id}", id)
                 .retrieve()
-                .bodyToMono(SearchUserProfileQueryResultDto.class);
+                .body(SearchUserProfileQueryResultDto.class);
     }
 }

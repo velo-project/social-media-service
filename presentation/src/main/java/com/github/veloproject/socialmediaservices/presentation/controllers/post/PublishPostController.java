@@ -4,6 +4,8 @@ import com.github.veloproject.socialmediaservices.application.commands.publish_p
 import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,7 @@ public class PublishPostController {
     @PostMapping
     public ResponseEntity<PublishPostCommandResult> publishPost(
             @RequestBody @Valid PublishPostCommand command,
-            JwtAuthenticationToken token) {
+            @Valid @NotBlank JwtAuthenticationToken token) {
         var response = mediator.send(command, token);
 
         return ResponseEntity
