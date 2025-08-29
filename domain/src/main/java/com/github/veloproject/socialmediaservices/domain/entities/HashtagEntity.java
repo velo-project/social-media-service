@@ -12,5 +12,6 @@ import java.util.Set;
 public class HashtagEntity {
     private Integer id;
     private Set<PostEntity> posts;
+    private String tag;
     private Integer usageCount;
 }
