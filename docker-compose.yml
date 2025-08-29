@@ -31,9 +31,10 @@ services:
       POSTGRES_PASSWORD: root
       RSA_PUBLIC_KEY: /app/keys/app.pub
       RSA_PRIVATE_KEY: /app/keys/app.key
-      USERS_API_URL: localhost:8080/api/user_services
     volumes:
       - C:\Users\joaop\OneDrive\Documentos\Velo\keys:/app/keys:ro # ro = Read Only
+    #env_file:
+    #  - .env
 
   nginx:
     image: nginx:alpine
