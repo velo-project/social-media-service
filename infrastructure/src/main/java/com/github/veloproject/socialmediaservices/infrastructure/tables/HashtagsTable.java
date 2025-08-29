@@ -18,6 +18,12 @@ public class HashtagsTable {
     @Column(name = "id_hashtag")
     private Integer id;
 
+    @Column(
+            name = "tag_hashtag",
+            length = 25
+    )
+    private String tag;
+
     @ManyToMany(mappedBy = "hashtags", fetch = FetchType.LAZY)
     private Set<PostsTable> posts;
 
