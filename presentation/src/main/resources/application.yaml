@@ -13,8 +13,6 @@ spring:
 jwt:
   public:
     key: file:${RSA_PUBLIC_KEY}
-  private:
-    key: file:${RSA_PRIVATE_KEY}
 
 # TODO
 springdoc:
