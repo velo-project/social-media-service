@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "tb_hashtags")
 public class HashtagsTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_hashtag")
     private Integer id;
 

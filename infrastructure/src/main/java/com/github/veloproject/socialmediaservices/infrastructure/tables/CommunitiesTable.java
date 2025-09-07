@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 )
 public class CommunitiesTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id_community"
     )
@@ -35,11 +35,10 @@ public class CommunitiesTable {
     )
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(
+    @Column(
             name = "created_by"
     )
-    private UsersTable createdBy;
+    private Integer createdBy;
 
     @CreationTimestamp
     @Column(
@@ -49,7 +48,7 @@ public class CommunitiesTable {
     )
     private LocalDateTime createdAt;
 
-    public CommunitiesTable(Integer id, String name, String description, UsersTable createdBy, LocalDateTime createdAt) {
+    public CommunitiesTable(Integer id, String name, String description, Integer createdBy, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;

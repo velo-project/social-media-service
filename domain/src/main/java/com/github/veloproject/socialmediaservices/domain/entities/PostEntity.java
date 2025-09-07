@@ -19,7 +19,7 @@ public class PostEntity {
     @Setter(AccessLevel.PRIVATE)
     private LocalDateTime postedAt;
     @Setter(AccessLevel.PRIVATE)
-    private UserEntity postedBy;
+    private Integer postedBy;
     @Setter(AccessLevel.PRIVATE)
     private CommunityEntity postedIn;
 }

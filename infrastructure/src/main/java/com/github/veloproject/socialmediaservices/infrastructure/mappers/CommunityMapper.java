@@ -6,26 +6,24 @@ import com.github.veloproject.socialmediaservices.infrastructure.tables.Communit
 public class CommunityMapper {
     public static CommunitiesTable toPersistence(CommunityEntity e) {
         if (e == null) return null;
-        var createdBy = UserMapper.toPersistence(e.getCreatedBy());
 
         return new CommunitiesTable(
                 e.getId(),
                 e.getName(),
                 e.getDescription(),
-                createdBy,
+                e.getCreatedBy(),
                 e.getCreatedAt()
         );
     }
 
     public static CommunityEntity toDomain(CommunitiesTable t) {
         if (t == null) return null;
-        var createdBy = UserMapper.toDomain(t.getCreatedBy());
 
         return CommunityEntity.builder()
                 .id(t.getId())
                 .name(t.getName())
                 .description(t.getDescription())
-                .createdBy(createdBy)
+                .createdBy(t.getCreatedBy())
                 .createdAt(t.getCreatedAt())
                 .build();
     }

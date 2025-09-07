@@ -19,7 +19,7 @@ import java.util.Set;
 )
 public class PostsTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id_post"
     )
@@ -32,13 +32,12 @@ public class PostsTable {
     )
     private String content;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(
+    @Column(
             name = "posted_by",
             updatable = false,
             nullable = false
     )
-    private UsersTable postedBy;
+    private Integer postedBy;
 
     /**
      * Um post pode ou não ser postado em uma comunidade.
@@ -72,7 +71,7 @@ public class PostsTable {
     )
     private LocalDateTime postedAt;
 
-    public PostsTable(Integer id, String content, UsersTable postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags) {
+    public PostsTable(Integer id, String content, Integer postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags) {
         this.id = id;
         this.content = content;
         this.postedBy = postedBy;

@@ -15,7 +15,7 @@ public class CommunityEntity {
     private String name;
     private String description;
     @Setter(AccessLevel.PRIVATE)
-    private UserEntity createdBy;
+    private Integer createdBy;
     @Setter(AccessLevel.PRIVATE)
     private LocalDateTime createdAt;
 }

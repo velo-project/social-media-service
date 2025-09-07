@@ -7,15 +7,14 @@ public class PostMapper {
     public static PostsTable toPersistence(PostEntity e) {
         if (e == null) return null;
 
-        var postedByMapped = UserMapper.toPersistence(e.getPostedBy());
-        var postedInMapped = 0; // TODO CommunityMapper
+        var postedInMapped = CommunityMapper.toPersistence(e.getPostedIn()); // TODO CommunityMapper
         var getHashtagsMapped = 0; // TODO HashtagMapper
 
         return new PostsTable(
                 e.getId(),
                 e.getContent(),
-                postedByMapped,
-                null,
+                e.getPostedBy(),
+                postedInMapped,
                 null // Possível problema de rollback com projeto em produção?
         );
     }
@@ -23,17 +22,16 @@ public class PostMapper {
     public static PostEntity toDomain(PostsTable t) {
         if (t == null) return null;
 
-        var postedByMapped = UserMapper.toDomain(t.getPostedBy());
-        var postedInMapped = 0; // TODO CommunityMapper
+        var postedInMapped = CommunityMapper.toDomain(t.getPostedIn()); // TODO CommunityMapper
         var getHashtagsMapped = 0; // TODO HashtagMapper
 
         return PostEntity.builder()
                 .id(t.getId())
                 .content(t.getContent())
                 .hashtags(null)
-                .postedIn(null)
+                .postedIn(postedInMapped)
                 .postedAt(t.getPostedAt())
-                .postedBy(postedByMapped)
+                .postedBy(t.getPostedBy())
                 .build();
     }
 }
