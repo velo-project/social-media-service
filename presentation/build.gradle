@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.4'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.flywaydb.flyway' version '9.5.1'
 }
 
 group = 'com.github.veloproject.socialmediaservices'
@@ -50,4 +51,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+flyway {
+    url = 'jdbc:postgresql://db:5432/social_media_services'
+    user = 'postgres'
+    password = 'root'
+    locations = ['filesystem:presentations/src/main/resources/db/migration']
+    table = 'social_media_services_flyway_schema_history'
 }

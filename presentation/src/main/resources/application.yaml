@@ -3,6 +3,7 @@ spring:
     name: SocialMediaServices
   flyway:
     table: social_media_services_flyway_schema_history
+    locations: classpath:db/migration
 
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DATABASE}
