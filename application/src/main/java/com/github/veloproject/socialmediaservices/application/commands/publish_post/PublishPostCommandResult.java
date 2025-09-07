@@ -3,7 +3,10 @@ package com.github.veloproject.socialmediaservices.application.commands.publish_
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Response;
 
 public class PublishPostCommandResult extends Response {
-    public PublishPostCommandResult(Integer statusCode, String message) {
+    private final Integer postId;
+
+    public PublishPostCommandResult(Integer statusCode, String message, Integer postId) {
         super(statusCode, message);
+        this.postId = postId;
     }
 }
