@@ -1,7 +1,7 @@
 package com.github.veloproject.socialmediaservices.application.abstractions;
 
-import com.github.veloproject.socialmediaservices.domain.entities.UserEntity;
+import com.github.veloproject.socialmediaservices.application.dto.UserInfo;
 
 public interface IUserServices {
-    UserEntity getUserById(Integer id);
+    UserInfo getUserById(Integer id);
 }
