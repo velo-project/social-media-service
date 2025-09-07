@@ -9,7 +9,7 @@ import com.github.veloproject.socialmediaservices.application.dto.UserInfo;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
 import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntity;
 import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
-import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidCommunityProvided;
+import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidCommunityProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidUserProvidedException;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -70,6 +70,6 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
 
         return communityRepository
                 .findById(communityId)
-                .orElseThrow(InvalidCommunityProvided::new);
+                .orElseThrow(InvalidCommunityProvidedException::new);
     }
 }
