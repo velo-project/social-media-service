@@ -32,7 +32,7 @@ services:
       POSTGRES_PASSWORD: root
       RSA_PUBLIC_KEY: /app/keys/app.pub
     volumes:
-      - C:\Users\joaop\OneDrive\Documentos\Velo\keys:/app/keys:ro # ro = Read Only
+      - D:\Programacao\TCC\Keys:/app/keys:ro # ro = Read Only
     #env_file:
     #  - .env
 
