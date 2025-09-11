@@ -36,6 +36,10 @@ public class SecurityConfig {
                                 "/api/social_media/post/v1/publish"
                         ).authenticated().anyRequest()
 
+                        .authenticated().requestMatchers(HttpMethod.GET,
+                                "/api/social_media/post/v1/**/posts"
+                        ).authenticated().anyRequest()
+
                         .authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2
