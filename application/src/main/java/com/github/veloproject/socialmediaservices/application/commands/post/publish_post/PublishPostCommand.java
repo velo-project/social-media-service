@@ -1,7 +1,6 @@
-package com.github.veloproject.socialmediaservices.application.commands.publish_post;
+package com.github.veloproject.socialmediaservices.application.commands.post.publish_post;
 
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Request;
-import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

@@ -1,10 +1,10 @@
-package com.github.veloproject.socialmediaservices.application.commands.publish_post.handler;
+package com.github.veloproject.socialmediaservices.application.commands.post.publish_post.handler;
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityRepository;
 import com.github.veloproject.socialmediaservices.application.abstractions.IPostRepository;
 import com.github.veloproject.socialmediaservices.application.abstractions.IUserServices;
-import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommand;
-import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommandResult;
+import com.github.veloproject.socialmediaservices.application.commands.post.publish_post.PublishPostCommand;
+import com.github.veloproject.socialmediaservices.application.commands.post.publish_post.PublishPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.dto.UserInfo;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
 import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntity;
@@ -66,8 +66,6 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
     }
 
     private CommunityEntity getCommunityById(Integer communityId) {
-        if (communityId == null) return null;
-
         return communityRepository
                 .findById(communityId)
                 .orElseThrow(InvalidCommunityProvidedException::new);
