@@ -34,13 +34,15 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST,
                                 "/api/social_media/post/v1/publish"
-                        ).authenticated().anyRequest()
+                        ).permitAll()
 
-                        .authenticated().requestMatchers(HttpMethod.GET,
-                                "/api/social_media/post/v1/**/posts"
-                        ).authenticated().anyRequest()
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/social_media/post/v1/*/posts"
+                        ).permitAll()
 
-                        .authenticated())
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/api/social_media/post/v1/delete"
+                        ).permitAll().anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults()))
