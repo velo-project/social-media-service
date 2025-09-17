@@ -1,7 +1,7 @@
 package com.github.veloproject.socialmediaservices.presentation.controllers.post;
 
-import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommand;
-import com.github.veloproject.socialmediaservices.application.commands.publish_post.PublishPostCommandResult;
+import com.github.veloproject.socialmediaservices.application.commands.post.publish_post.PublishPostCommand;
+import com.github.veloproject.socialmediaservices.application.commands.post.publish_post.PublishPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,8 @@ public class PublishPostController {
     @PostMapping("/v1/publish")
     public ResponseEntity<PublishPostCommandResult> publishPost(
             @RequestBody @Valid PublishPostCommand command,
-            JwtAuthenticationToken token) {
+            JwtAuthenticationToken token
+    ) {
         var response = mediator.send(command, token);
 
         return ResponseEntity
