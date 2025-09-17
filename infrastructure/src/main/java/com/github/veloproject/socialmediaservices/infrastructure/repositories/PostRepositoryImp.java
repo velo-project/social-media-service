@@ -6,6 +6,9 @@ import com.github.veloproject.socialmediaservices.infrastructure.mappers.PostMap
 import com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa.IPostRepositoryJpa;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class PostRepositoryImp implements IPostRepository {
     private final IPostRepositoryJpa jpa;
@@ -17,9 +20,30 @@ public class PostRepositoryImp implements IPostRepository {
     @Override
     public Integer save(PostEntity entity) {
         var table = PostMapper.toPersistence(entity);
-
         return jpa
                 .save(table)
                 .getId();
+    }
+
+    @Override
+    public void deleteById(Integer postId) {
+        jpa.deleteById(postId);
+    }
+
+    @Override
+    public Optional<PostEntity> findById(Integer id) {
+        var post = jpa.findById(id);
+        return post
+                .map(PostMapper::toDomain);
+    }
+
+    @Override
+    public boolean existsById(Integer postId) {
+        return jpa.existsById(postId);
+    }
+
+    @Override
+    public List<PostEntity> findAllByUserId(Integer userId) {
+        return jpa.findAllByPostedBy((userId));
     }
 }
