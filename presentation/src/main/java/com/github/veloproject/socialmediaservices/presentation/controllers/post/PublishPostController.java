@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/social_media/post")
+@RequestMapping("/api/social_media/posts")
 public class PublishPostController {
     private final LoggingMediatorImp mediator;
 
