@@ -19,7 +19,7 @@ public class GetPostByIdQueryHandler extends NoAuthRequestHandler<GetPostByIdQue
                 .findById(request.id())
                 .orElseThrow(InvalidPostProvidedException::new);
 
-        return new GetPostByIdQueryResult(post, 200, "Post encontrado.");
+        return new GetPostByIdQueryResult(200, "Post encontrado.", post);
     }
 
 }

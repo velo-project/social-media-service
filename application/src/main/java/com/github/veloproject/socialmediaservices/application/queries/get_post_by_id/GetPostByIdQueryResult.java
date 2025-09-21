@@ -2,10 +2,13 @@ package com.github.veloproject.socialmediaservices.application.queries.get_post_
 
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Response;
 import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
+import lombok.Getter;
 
+@Getter
 public class GetPostByIdQueryResult extends Response {
     private final PostEntity post;
-    public GetPostByIdQueryResult(PostEntity post, Integer statusCode, String message) {
+
+    public GetPostByIdQueryResult(Integer statusCode, String message, PostEntity post) {
         super(statusCode, message);
         this.post = post;
     }
