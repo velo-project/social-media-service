@@ -4,9 +4,10 @@ import com.github.veloproject.socialmediaservices.application.abstractions.IPost
 import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
 import com.github.veloproject.socialmediaservices.infrastructure.mappers.PostMapper;
 import com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa.IPostRepositoryJpa;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -43,7 +44,9 @@ public class PostRepositoryImp implements IPostRepository {
     }
 
     @Override
-    public List<PostEntity> findAllByUserId(Integer userId) {
-        return jpa.findAllByPostedBy((userId));
+    public Page<PostEntity> findPageByUserId(Integer userId, Pageable pageable) {
+        return jpa
+                .findByPostedBy(userId, pageable)
+                .map(PostMapper::toDomain);
     }
 }
