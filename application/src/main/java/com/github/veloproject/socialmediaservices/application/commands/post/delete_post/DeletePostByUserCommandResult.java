@@ -2,8 +2,8 @@ package com.github.veloproject.socialmediaservices.application.commands.post.del
 
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Response;
 
-public class DeletePostCommandResult extends Response {
-    public DeletePostCommandResult(Integer statusCode, String message) {
-        super(statusCode, message);
+public class DeletePostByUserCommandResult extends Response {
+    public DeletePostByUserCommandResult(Integer statusCode) {
+        super(statusCode);
     }
 }
