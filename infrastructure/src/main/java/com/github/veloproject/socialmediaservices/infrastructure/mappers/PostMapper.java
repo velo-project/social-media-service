@@ -7,7 +7,7 @@ public class PostMapper {
     public static PostsTable toPersistence(PostEntity e) {
         if (e == null) return null;
 
-        var postedInMapped = CommunityMapper.toPersistence(e.getPostedIn()); // TODO CommunityMapper
+        var postedInMapped = CommunityMapper.toPersistence(e.getPostedIn());
         var getHashtagsMapped = 0; // TODO HashtagMapper
 
         return new PostsTable(

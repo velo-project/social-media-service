@@ -7,8 +7,8 @@ import lombok.Getter;
 public class PublishPostCommandResult extends Response {
     private final Integer postId;
 
-    public PublishPostCommandResult(Integer statusCode, String message, Integer postId) {
-        super(statusCode, message);
+    public PublishPostCommandResult(Integer statusCode, Integer postId) {
+        super(statusCode);
         this.postId = postId;
     }
 }

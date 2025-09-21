@@ -37,9 +37,7 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
     public PublishPostCommandResult handle(PublishPostCommand request,
                                            JwtAuthenticationToken token) {
         var user = getUserByToken(token);
-        var community = getCommunityById(request.postedIn());
-
-        System.out.println(user.name());
+        var community = getCommunityByIdOrReturnNull(request.postedIn());
 
         var post = PostEntity.builder()
                 .content(request.content())
@@ -51,7 +49,6 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
 
         return new PublishPostCommandResult(
                 200,
-                "Post publicado.",
                 postId
         );
     }
@@ -65,9 +62,9 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
                 .getUserById(integerSubject);
     }
 
-    private CommunityEntity getCommunityById(Integer communityId) {
-        return communityRepository
+    private CommunityEntity getCommunityByIdOrReturnNull(Integer communityId) {
+        return (communityId != null) ? communityRepository
                 .findById(communityId)
-                .orElseThrow(InvalidCommunityProvidedException::new);
+                .orElseThrow(InvalidCommunityProvidedException::new) : null;
     }
 }
