@@ -33,16 +33,19 @@ public class SecurityConfig {
                         .permitAll()
 
                         .requestMatchers(HttpMethod.POST,
-                                "/api/social_media/posts/v1/publish"
+                                "/api/social_media/posts/v1/publish",
+                                "/api/social_media/likes/v1/like"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.GET,
                                 "/api/social_media/posts/v1/user/*",
-                                "/api/social_media/posts/v1/post"
+                                "/api/social_media/posts/v1/post",
+                                "/api/social_media/likes/v1/*"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.DELETE,
-                                "/api/social_media/posts/v1/delete"
+                                "/api/social_media/posts/v1/delete",
+                                "/api/social_media/likes/v1/unlike"
                         ).permitAll().anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2
