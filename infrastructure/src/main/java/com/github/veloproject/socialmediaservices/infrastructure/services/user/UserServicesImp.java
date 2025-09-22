@@ -2,7 +2,6 @@ package com.github.veloproject.socialmediaservices.infrastructure.services.user;
 
 import com.github.veloproject.socialmediaservices.application.abstractions.IUserServices;
 import com.github.veloproject.socialmediaservices.application.dto.UserInfo;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -41,6 +40,12 @@ public class UserServicesImp implements IUserServices {
         );
 
         return null;
+    }
+
+    // TODO
+    @Override
+    public boolean existsById(Integer id) {
+        return true;
     }
 
     public record GetUserByIdResponse(UserDTO user)  {}
