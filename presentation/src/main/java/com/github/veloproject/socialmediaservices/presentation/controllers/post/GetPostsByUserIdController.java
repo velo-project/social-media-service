@@ -1,8 +1,8 @@
 package com.github.veloproject.socialmediaservices.presentation.controllers.post;
 
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
-import com.github.veloproject.socialmediaservices.application.queries.get_posts_by_user_id.GetPostsByUserIdQuery;
-import com.github.veloproject.socialmediaservices.application.queries.get_posts_by_user_id.GetPostsByUserIdQueryResult;
+import com.github.veloproject.socialmediaservices.application.queries.post.get_posts_by_user_id.GetPostsByUserIdQuery;
+import com.github.veloproject.socialmediaservices.application.queries.post.get_posts_by_user_id.GetPostsByUserIdQueryResult;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
