@@ -18,10 +18,10 @@ jwt:
 # TODO
 springdoc:
   api-docs:
-    path: /api/user/docs/api-docs
+    path: /api/social_media/docs/api-docs
   swagger-ui:
-    path: /api/user/docs/
-    config-url: /api/user/docs/api-docs/swagger-config
+    path: /api/social_media/docs/
+    config-url: /api/social_media/docs/api-docs/swagger-config
     urls:
-      - name: users-service
-        url: /api/user/docs/api-docs
+      - name: sm-service
+        url: /api/social_media/docs/api-docs
