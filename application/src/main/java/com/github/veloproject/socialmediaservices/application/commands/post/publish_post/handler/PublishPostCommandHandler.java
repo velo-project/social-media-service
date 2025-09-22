@@ -11,6 +11,7 @@ import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntit
 import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidCommunityProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidUserProvidedException;
+import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,7 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
         this.userServices = userServices;
     }
 
-    // TODO Validação de usuário por annotation
-    // TODO Sistema de Hashtags
-    // TODO Exception Handlers
+    @Transactional
     @Override
     public PublishPostCommandResult handle(PublishPostCommand request,
                                            JwtAuthenticationToken token) {

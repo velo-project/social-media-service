@@ -6,6 +6,7 @@ import com.github.veloproject.socialmediaservices.application.commands.post.dele
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidPostProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.UserNotAuthorException;
+import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class DeletePostByUserCommandHandler extends AuthRequestHandler<DeletePos
         this.postRepository = postRepository;
     }
 
+    @Transactional
     @Override
     public DeletePostByUserCommandResult handle(DeletePostByUserCommand request,
                                                 JwtAuthenticationToken token) {
