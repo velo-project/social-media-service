@@ -17,13 +17,13 @@ public class PostLikeRepositoryImp implements IPostLikeRepository {
     }
 
     @Override
-    public void like(PostLikeEntity entity) {
+    public void save(PostLikeEntity entity) {
         var table = PostLikeMapper.toPersistence(entity);
         jpa.save(table);
     }
 
     @Override
-    public void unlike(Integer postId, Integer userId) {
+    public void delete(Integer postId, Integer userId) {
         jpa.deleteByPostIdAndLikedBy(postId, userId);
     }
 
