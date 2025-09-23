@@ -23,13 +23,10 @@ public class DeletePostByUserCommandHandler extends AuthRequestHandler<DeletePos
     public DeletePostByUserCommandResult handle(DeletePostByUserCommand request,
                                                 JwtAuthenticationToken token) {
         var post = postRepository
-                .findById(request.postId());
-
-        if (post.isEmpty())
-            throw new InvalidPostProvidedException();
+                .findById(request.postId()).orElseThrow(InvalidPostProvidedException::new);
 
         var userId = Integer.valueOf(token.getToken().getSubject());
-        if (!post.get().getPostedBy().equals(userId))
+        if (!post.getPostedBy().equals(userId))
             throw new UserNotAuthorException();
 
         postRepository.deleteById(request.postId());
