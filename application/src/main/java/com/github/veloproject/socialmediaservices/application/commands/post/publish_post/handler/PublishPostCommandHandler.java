@@ -15,6 +15,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCommand, PublishPostCommandResult> {
     private final IPostRepository postRepository;
@@ -57,8 +59,11 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
                 token.getToken()
                 .getSubject());
 
-        return userServices
+        var user = userServices
                 .getUserById(integerSubject);
+
+        return Optional.ofNullable(user)
+                .orElseThrow(InvalidUserProvidedException::new);
     }
 
     private CommunityEntity getCommunityByIdOrReturnNull(Integer communityId) {
