@@ -1,7 +1,6 @@
 package com.github.veloproject.socialmediaservices.application.commands.comment.delete_comment_on_a_post.handler;
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommentRepository;
-import com.github.veloproject.socialmediaservices.application.abstractions.IUserServices;
 import com.github.veloproject.socialmediaservices.application.commands.comment.delete_comment_on_a_post.DeleteCommentOnAPostCommand;
 import com.github.veloproject.socialmediaservices.application.commands.comment.delete_comment_on_a_post.DeleteCommentOnAPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
@@ -14,11 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteCommentOnAPostCommandHandler extends AuthRequestHandler<DeleteCommentOnAPostCommand, DeleteCommentOnAPostCommandResult> {
     private final ICommentRepository commentRepository;
-    private final IUserServices userServices;
 
-    public DeleteCommentOnAPostCommandHandler(ICommentRepository commentRepository, IUserServices userServices) {
+    public DeleteCommentOnAPostCommandHandler(ICommentRepository commentRepository) {
         this.commentRepository = commentRepository;
-        this.userServices = userServices;
     }
 
     @Transactional
