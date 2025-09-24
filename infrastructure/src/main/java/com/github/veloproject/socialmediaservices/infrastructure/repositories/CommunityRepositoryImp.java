@@ -18,8 +18,22 @@ public class CommunityRepositoryImp implements ICommunityRepository {
 
     @Override
     public Optional<CommunityEntity> findById(Integer id) {
-        var user = jpa.findById(id);
+        var community = jpa.findById(id);
 
-        return user.map(CommunityMapper::toDomain);
+        return community.map(CommunityMapper::toDomain);
+    }
+
+    @Override
+    public Integer save(CommunityEntity communityEntity) {
+        var community = CommunityMapper
+                .toPersistence(communityEntity);
+
+        return jpa.save(community)
+                .getId();
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        jpa.deleteById(id);
     }
 }
