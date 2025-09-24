@@ -41,13 +41,15 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,
                                 "/api/social_media/posts/v1/user/*",
                                 "/api/social_media/posts/v1/post",
-                                "/api/social_media/likes/v1/*"
+                                "/api/social_media/likes/v1/*",
+                                "/api/social_media/communities/v1/community"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.DELETE,
                                 "/api/social_media/posts/v1/delete",
                                 "/api/social_media/likes/v1/unlike",
-                                "/api/social_media/comments/v1/delete"
+                                "/api/social_media/comments/v1/delete",
+                                "/api/social_media/communities/v1/delete"
                         ).permitAll().anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2
