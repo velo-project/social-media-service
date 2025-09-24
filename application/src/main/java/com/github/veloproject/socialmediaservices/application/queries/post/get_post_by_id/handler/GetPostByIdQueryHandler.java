@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetPostByIdQueryHandler extends NoAuthRequestHandler<GetPostByIdQuery, GetPostByIdQueryResult> {
     private final IPostRepository postRepository;
+
     public GetPostByIdQueryHandler (IPostRepository postRepository) {
         this.postRepository = postRepository;
     }
+
     @Override
     public GetPostByIdQueryResult handle(GetPostByIdQuery request) {
         var post = postRepository
