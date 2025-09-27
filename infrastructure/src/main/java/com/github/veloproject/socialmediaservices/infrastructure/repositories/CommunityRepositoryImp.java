@@ -24,6 +24,11 @@ public class CommunityRepositoryImp implements ICommunityRepository {
     }
 
     @Override
+    public boolean existsById(Integer id) {
+        return jpa.existsById(id);
+    }
+
+    @Override
     public Integer save(CommunityEntity communityEntity) {
         var community = CommunityMapper
                 .toPersistence(communityEntity);
