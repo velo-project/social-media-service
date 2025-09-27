@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface ICommunityRepository {
     Optional<CommunityEntity> findById(Integer id);
+    boolean existsById(Integer id);
     Integer save(CommunityEntity communityEntity);
     void deleteById(Integer id);
 }
