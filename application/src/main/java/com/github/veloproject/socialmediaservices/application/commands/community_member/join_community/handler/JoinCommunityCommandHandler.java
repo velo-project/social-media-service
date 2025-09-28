@@ -10,6 +10,7 @@ import com.github.veloproject.socialmediaservices.domain.entities.CommunityMembe
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidCommunityProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidUserProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.UserAlreadyInCommunityException;
+import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class JoinCommunityCommandHandler extends AuthRequestHandler<JoinCommunit
         this.userServices = userServices;
     }
 
+    @Transactional
     @Override
     public JoinCommunityCommandResult handle(JoinCommunityCommand request,
                                              JwtAuthenticationToken token) {
