@@ -17,13 +17,13 @@ public class PostRepositoryImp implements IPostRepository {
     public PostRepositoryImp(IPostRepositoryJpa jpa) {
         this.jpa = jpa;
     }
-
     @Override
-    public Integer save(PostEntity entity) {
-        var table = PostMapper.toPersistence(entity);
-        return jpa
-                .save(table)
-                .getId();
+    public PostEntity save(PostEntity entity) {
+        var table = PostMapper
+                .toPersistence(entity);
+
+        return PostMapper
+                .toDomain(jpa.save(table));
     }
 
     @Override

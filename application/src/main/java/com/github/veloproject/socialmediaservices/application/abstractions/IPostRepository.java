@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IPostRepository {
-    Integer save(PostEntity user);
+    PostEntity save(PostEntity user);
     void deleteById(Integer postId);
     Optional<PostEntity> findById(Integer id);
     boolean existsById(Integer postId);

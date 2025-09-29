@@ -1,5 +1,6 @@
 package com.github.veloproject.socialmediaservices.infrastructure.tables;
 
+import com.github.veloproject.socialmediaservices.domain.entities.HashtagEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,11 +25,8 @@ public class HashtagsTable {
     )
     private String tag;
 
-    @ManyToMany(mappedBy = "hashtags", fetch = FetchType.LAZY)
-    private Set<PostsTable> posts;
-
-    @Column(
-            name = "usage_count_hashtag"
-    )
-    private Long usageCount;
+    public HashtagsTable(Integer id, String tag) {
+        this.id = id;
+        this.tag = tag;
+    }
 }
