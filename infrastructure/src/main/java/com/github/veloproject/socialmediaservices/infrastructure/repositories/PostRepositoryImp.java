@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,6 +18,7 @@ public class PostRepositoryImp implements IPostRepository {
     public PostRepositoryImp(IPostRepositoryJpa jpa) {
         this.jpa = jpa;
     }
+
     @Override
     public PostEntity save(PostEntity entity) {
         var table = PostMapper
@@ -48,5 +50,13 @@ public class PostRepositoryImp implements IPostRepository {
         return jpa
                 .findByPostedBy(userId, pageable)
                 .map(PostMapper::toDomain);
+    }
+
+    @Override
+    public List<PostEntity> findRecommendedFeed(Integer userId) {
+        return jpa.findRecommendedFeed(userId)
+                .stream()
+                .map(PostMapper::toDomain)
+                .toList();
     }
 }
