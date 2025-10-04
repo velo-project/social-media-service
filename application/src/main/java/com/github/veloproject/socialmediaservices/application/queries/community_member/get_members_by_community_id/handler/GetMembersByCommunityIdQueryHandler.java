@@ -1,4 +1,4 @@
-package com.github.veloproject.socialmediaservices.application.queries.community_member.get_members_by_community_id.handler.handler;
+package com.github.veloproject.socialmediaservices.application.queries.community_member.get_members_by_community_id.handler;
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityMemberRepository;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.NoAuthRequestHandler;
