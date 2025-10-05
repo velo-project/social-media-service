@@ -36,7 +36,8 @@ public class SecurityConfig {
                                 "/api/social_media/posts/v1/publish",
                                 "/api/social_media/likes/v1/like",
                                 "/api/social_media/comments/v1/publish",
-                                "/api/social_media/communities/v1/join"
+                                "/api/social_media/communities/v1/join",
+                                "/api/social_media/followers/v1/follow"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.GET,
@@ -53,7 +54,8 @@ public class SecurityConfig {
                                 "/api/social_media/likes/v1/unlike",
                                 "/api/social_media/comments/v1/delete",
                                 "/api/social_media/communities/v1/delete",
-                                "/api/social_media/communities/v1/leave"
+                                "/api/social_media/communities/v1/leave",
+                                "/api/social_media/followers/v1/unfollow"
                         ).permitAll().anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2
