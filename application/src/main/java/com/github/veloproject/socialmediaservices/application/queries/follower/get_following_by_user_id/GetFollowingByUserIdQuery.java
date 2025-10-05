@@ -3,6 +3,7 @@ package com.github.veloproject.socialmediaservices.application.queries.follower.
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Request;
 
 public record GetFollowingByUserIdQuery(
-        Integer userId
+        Integer userId,
+        Integer page
 ) implements Request<GetFollowingByUserIdQueryResult> {
 }
