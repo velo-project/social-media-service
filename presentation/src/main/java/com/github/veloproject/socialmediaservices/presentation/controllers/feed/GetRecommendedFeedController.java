@@ -24,7 +24,7 @@ public class GetRecommendedFeedController {
             @PathVariable Integer userId,
             JwtAuthenticationToken token
     ) {
-        var query = new GetRecommendedFeedQuery(userId);
+        var query = new GetRecommendedFeedQuery();
         var response = mediator.send(query, token);
         return ResponseEntity
                 .status(response.getStatusCode())
