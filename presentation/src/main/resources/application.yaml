@@ -15,6 +15,12 @@ jwt:
   public:
     key: file:${RSA_PUBLIC_KEY}
 
+gcp:
+  credentials:
+    file: ${GOOGLE_CLOUD_CREDENTIALS}
+  project-id: ${GOOGLE_CLOUD_PROJECT}
+  bucket: ${GOOGLE_CLOUD_BUCKET}
+
 # TODO
 springdoc:
   api-docs:
