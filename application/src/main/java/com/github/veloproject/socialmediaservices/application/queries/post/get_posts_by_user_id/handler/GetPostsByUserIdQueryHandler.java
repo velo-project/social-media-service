@@ -18,7 +18,10 @@ public class GetPostsByUserIdQueryHandler extends NoAuthRequestHandler<GetPostsB
 
     @Override
     public GetPostsByUserIdQueryResult handle(GetPostsByUserIdQuery request) {
-        var pageRequest = PageRequest.of(0, request.page(), Sort.by("postedIn").descending());
+        var pageRequest = PageRequest.of(
+                request.page(),
+                20,
+                Sort.by("postedIn").descending());
         var posts = postRepository.findPageByUserId(request.userId(), pageRequest);
 
         return new GetPostsByUserIdQueryResult(200, posts);

@@ -19,8 +19,8 @@ public class GetUsersLikedAPostQueryHandler extends NoAuthRequestHandler<GetUser
     @Override
     public GetUsersLikedAPostQueryResult handle(GetUsersLikedAPostQuery request) {
         var pageRequest = PageRequest.of(
-                0,
                 request.page(),
+                20,
                 Sort.by("likedAt")
                         .descending());
         var users = postlikeRepository.findLikesByPost(request.postId(), pageRequest);

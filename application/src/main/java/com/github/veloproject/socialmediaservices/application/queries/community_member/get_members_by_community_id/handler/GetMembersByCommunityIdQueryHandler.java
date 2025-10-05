@@ -19,8 +19,8 @@ public class GetMembersByCommunityIdQueryHandler extends NoAuthRequestHandler<Ge
     @Override
     public GetMembersByCommunityIdQueryResult handle(GetMembersByCommunityIdQuery request) {
         var pageRequest = PageRequest.of(
-                0,
                 request.page(),
+                20,
                 Sort.by("joinedAt")
                         .descending());
         var members = communityMemberRepository.findMembersByCommunityId(request.communityId(), pageRequest);
