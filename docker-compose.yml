@@ -32,12 +32,18 @@ services:
       POSTGRES_DATABASE: ${POSTGRES_DB}
       POSTGRES_USERNAME: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
+      GOOGLE_CLOUD_CREDENTIALS: /opt/app/credentials.json
+      GOOGLE_CLOUD_BUCKET: ${GOOGLE_CLOUD_BUCKET}
       RSA_PUBLIC_KEY: /run/secrets/app.pub
     volumes:
       - type: bind
         source: ${RSA_PUBLIC_KEY}
         target: /run/secrets/app.pub
         read_only: true
+      - type: bind
+        source: ${GOOGLE_CLOUD_CREDENTIALS}
+        target: /opt/app/credentials.json
     env_file:
       - .env
 
