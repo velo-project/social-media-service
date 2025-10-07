@@ -7,6 +7,7 @@ import com.github.veloproject.socialmediaservices.application.commands.follower.
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
 import com.github.veloproject.socialmediaservices.domain.entities.UserFollowerEntity;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidUserProvidedException;
+import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class FollowUserCommandHandler extends AuthRequestHandler<FollowUserComma
         this.userServices = userServices;
     }
 
+    @Transactional
     @Override
     public FollowUserCommandResult handle(FollowUserCommand request,
                                           JwtAuthenticationToken token) {
