@@ -34,7 +34,6 @@ gemini:
     embedding:
       model: ${GEMINI_EMBEDDING_MODEL}
 
-# TODO
 springdoc:
   api-docs:
     path: /api/social_media/docs/api-docs
