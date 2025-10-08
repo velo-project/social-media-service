@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +37,13 @@ public class CommunitiesTable {
     )
     private String description;
 
+    @JdbcTypeCode(SqlTypes.VECTOR)
+    @Column(
+            name = "embeddings_community",
+            columnDefinition = "vector(1536)"
+    )
+    private float[] embeddings;
+
     @Column(
             name = "created_by"
     )
@@ -48,10 +57,11 @@ public class CommunitiesTable {
     )
     private LocalDateTime createdAt;
 
-    public CommunitiesTable(Integer id, String name, String description, Integer createdBy, LocalDateTime createdAt) {
+    public CommunitiesTable(Integer id, String name, String description, float[] embeddings, Integer createdBy, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.embeddings = embeddings;
         this.createdBy = createdBy;
         this.createdAt = createdAt;
     }

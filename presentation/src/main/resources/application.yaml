@@ -27,6 +27,13 @@ gcp:
   project-id: ${GOOGLE_CLOUD_PROJECT}
   bucket: ${GOOGLE_CLOUD_BUCKET}
 
+gemini:
+  api:
+    key: ${GEMINI_API_KEY}
+
+    embedding:
+      model: ${GEMINI_EMBEDDING_MODEL}
+
 # TODO
 springdoc:
   api-docs:

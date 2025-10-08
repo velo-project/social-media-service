@@ -2,6 +2,7 @@ package com.github.veloproject.socialmediaservices.application.commands.communit
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityMemberRepository;
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityRepository;
+import com.github.veloproject.socialmediaservices.application.abstractions.IGeminiAPIService;
 import com.github.veloproject.socialmediaservices.application.abstractions.IUserGRPCClient;
 import com.github.veloproject.socialmediaservices.application.commands.community.create_community.CreateCommunityCommand;
 import com.github.veloproject.socialmediaservices.application.commands.community.create_community.CreateCommunityCommandResult;
@@ -18,13 +19,16 @@ public class CreateCommunityCommandHandler extends AuthRequestHandler<CreateComm
     private final ICommunityRepository communityRepository;
     private final IUserGRPCClient userServices;
     private final ICommunityMemberRepository communityMemberRepository;
+    private final IGeminiAPIService geminiAPIService;
 
     public CreateCommunityCommandHandler(ICommunityRepository communityRepository,
                                          IUserGRPCClient userServices,
-                                         ICommunityMemberRepository communityMemberRepository) {
+                                         ICommunityMemberRepository communityMemberRepository,
+                                         IGeminiAPIService geminiAPIService) {
         this.communityRepository = communityRepository;
         this.userServices = userServices;
         this.communityMemberRepository = communityMemberRepository;
+        this.geminiAPIService = geminiAPIService;
     }
 
     @Override
@@ -35,9 +39,15 @@ public class CreateCommunityCommandHandler extends AuthRequestHandler<CreateComm
         if (!userExists)
             throw new InvalidUserProvidedException();
 
+        var embeddings = geminiAPIService
+                .generateEmbeddings(request.name()
+                        + " "
+                        + request.description());
+
         var community = CommunityEntity.builder()
                 .name(request.name())
                 .description(request.description())
+                .embeddings(embeddings)
                 .createdBy(integerSubject)
                 .build();
 

@@ -1,11 +1,14 @@
 package com.github.veloproject.socialmediaservices.infrastructure.repositories;
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityRepository;
+import com.github.veloproject.socialmediaservices.application.dto.CommunityDto;
 import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntity;
 import com.github.veloproject.socialmediaservices.infrastructure.mappers.CommunityMapper;
 import com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa.ICommunityRepositoryJpa;
+import com.github.veloproject.socialmediaservices.infrastructure.tables.CommunitiesTable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -40,5 +43,13 @@ public class CommunityRepositoryImp implements ICommunityRepository {
     @Override
     public void deleteById(Integer id) {
         jpa.deleteById(id);
+    }
+
+    @Override
+    public List<CommunityDto> findSimilarByEmbedding(float[] embedding, float threshold) {
+        return jpa.findSimilarByEmbedding(embedding, threshold)
+                .stream()
+                .map(CommunityMapper::toDto)
+                .toList();
     }
 }

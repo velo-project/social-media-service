@@ -29,6 +29,8 @@ public class FollowUserCommandHandler extends AuthRequestHandler<FollowUserComma
         var subject = Integer.valueOf(token.getToken().getSubject());
         if (!userServices.existsByUserId(subject) || !userServices.existsByUserId(request.userId()))
             throw new InvalidUserProvidedException();
+        else if (request.userId().equals(subject))
+            throw new InvalidUserProvidedException();
 
         var entity = UserFollowerEntity.builder()
                 .userId(request.userId())

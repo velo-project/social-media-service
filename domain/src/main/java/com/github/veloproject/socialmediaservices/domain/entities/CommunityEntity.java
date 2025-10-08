@@ -14,6 +14,7 @@ public class CommunityEntity {
     private Integer id;
     private String name;
     private String description;
+    private float[] embeddings;
     @Setter(AccessLevel.PRIVATE)
     private Integer createdBy;
     @Setter(AccessLevel.PRIVATE)
