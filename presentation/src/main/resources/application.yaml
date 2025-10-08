@@ -17,8 +17,8 @@ jwt:
 
 grpc:
   client:
-    users-services:
-      address: 'static://localhost:9090'
+    user-services:
+      address: 'u-app:9090'
       negotiationType: plaintext
 
 gcp:
