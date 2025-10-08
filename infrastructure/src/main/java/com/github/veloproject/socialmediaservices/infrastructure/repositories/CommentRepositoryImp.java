@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -21,26 +22,40 @@ public class CommentRepositoryImp implements ICommentRepository {
     @Override
     public Integer save(CommentEntity entity) {
         var table = CommentMapper.toPersistence(entity);
+        if (table.getIsDeleted() == null) table.setIsDeleted(false);
+
         return jpa.save(table).getId();
     }
 
     @Override
     public void deleteById(Integer commentId) {
-        jpa.deleteById(commentId);
+        var comment = jpa.findById(commentId);
+
+        if (comment.isPresent()) {
+            comment.get().setIsDeleted(true);
+            jpa.save(comment.get());
+        }
     }
 
     @Override
     public Optional<CommentEntity> findById(Integer commentId) {
-        return jpa.findById(commentId).map(CommentMapper::toDomain);
+        return jpa.findById(commentId)
+                .filter(c -> c.getIsDeleted() == false)
+                .map(CommentMapper::toDomain);
     }
 
     @Override
-    public Page<CommentEntity> findByPostId(Integer postId, Pageable pageable) {
-        return jpa.findByPostId(postId, pageable).map(CommentMapper::toDomain);
+    public List<CommentEntity> findByPostId(Integer postId, Pageable pageable) {
+        return jpa.findByPostId(postId, pageable)
+                .toList()
+                .stream()
+                .filter(c -> c.getIsDeleted() == false)
+                .map(CommentMapper::toDomain)
+                .toList();
     }
 
     @Override
     public long countByPostId(Integer postId) {
-        return jpa.countByPostId(postId);
+        return jpa.countByPostIdAndIsDeletedFalse(postId);
     }
 }

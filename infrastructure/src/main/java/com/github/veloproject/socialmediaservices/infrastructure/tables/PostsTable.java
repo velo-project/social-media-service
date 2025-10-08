@@ -78,6 +78,11 @@ public class PostsTable {
     )
     private LocalDateTime postedAt;
 
+    @Column(
+            name = "deleted_post"
+    )
+    private Boolean isDeleted;
+
     public PostsTable(Integer id, String content, Integer postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags) {
         this.id = id;
         this.content = content;

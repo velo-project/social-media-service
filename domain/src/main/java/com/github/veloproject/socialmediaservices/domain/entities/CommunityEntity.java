@@ -19,4 +19,5 @@ public class CommunityEntity {
     private Integer createdBy;
     @Setter(AccessLevel.PRIVATE)
     private LocalDateTime createdAt;
+    private Boolean isDeleted;
 }

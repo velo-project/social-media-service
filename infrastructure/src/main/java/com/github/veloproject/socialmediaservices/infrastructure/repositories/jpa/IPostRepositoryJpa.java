@@ -1,5 +1,6 @@
 package com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa;
 
+import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
 import com.github.veloproject.socialmediaservices.infrastructure.tables.PostsTable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,4 +41,8 @@ ORDER BY posted_at DESC
 LIMIT 50;
         """, nativeQuery = true)
     List<PostsTable> findRecommendedFeed(@Param("userId") Integer userId);
+
+    boolean existsByIdAndIsDeletedFalse(Integer id);
+
+    Page<PostEntity> findByPostedByAndIsDeletedFalse(Integer postedBy, Pageable pageable);
 }

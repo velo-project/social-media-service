@@ -35,6 +35,7 @@ public class CommunityRepositoryImp implements ICommunityRepository {
     public Integer save(CommunityEntity communityEntity) {
         var community = CommunityMapper
                 .toPersistence(communityEntity);
+        if (community.getIsDeleted() == null) community.setIsDeleted(false);
 
         return jpa.save(community)
                 .getId();
@@ -42,13 +43,19 @@ public class CommunityRepositoryImp implements ICommunityRepository {
 
     @Override
     public void deleteById(Integer id) {
-        jpa.deleteById(id);
+        var community = jpa.findById(id);
+
+        if (community.isPresent()) {
+            community.get().setIsDeleted(true);
+            jpa.save(community.get());
+        }
     }
 
     @Override
     public List<CommunityDto> findSimilarByEmbedding(float[] embedding, float threshold) {
         return jpa.findSimilarByEmbedding(embedding, threshold)
                 .stream()
+                .filter(c -> c.getIsDeleted() == false)
                 .map(CommunityMapper::toDto)
                 .toList();
     }

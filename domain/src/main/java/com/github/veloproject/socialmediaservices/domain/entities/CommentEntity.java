@@ -17,4 +17,5 @@ public class CommentEntity {
     private String content;
     @Setter(AccessLevel.PRIVATE)
     private LocalDateTime commentedAt;
+    private Boolean isDeleted;
 }

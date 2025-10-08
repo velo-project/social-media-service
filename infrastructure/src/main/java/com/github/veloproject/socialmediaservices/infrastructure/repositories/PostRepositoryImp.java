@@ -23,6 +23,7 @@ public class PostRepositoryImp implements IPostRepository {
     public PostEntity save(PostEntity entity) {
         var table = PostMapper
                 .toPersistence(entity);
+        if (table.getIsDeleted() == null) table.setIsDeleted(false);
 
         return PostMapper
                 .toDomain(jpa.save(table));
@@ -30,32 +31,38 @@ public class PostRepositoryImp implements IPostRepository {
 
     @Override
     public void deleteById(Integer postId) {
-        jpa.deleteById(postId);
+        var post = jpa.findById(postId);
+
+        if (post.isPresent()) {
+            post.get().setIsDeleted(true);
+            jpa.save(post.get());
+        }
     }
 
     @Override
     public Optional<PostEntity> findById(Integer id) {
         var post = jpa.findById(id);
         return post
+                .filter(p -> p.getIsDeleted() == false)
                 .map(PostMapper::toDomain);
     }
 
     @Override
     public boolean existsById(Integer postId) {
-        return jpa.existsById(postId);
+        return jpa.existsByIdAndIsDeletedFalse(postId);
     }
 
     @Override
     public Page<PostEntity> findPageByUserId(Integer userId, Pageable pageable) {
         return jpa
-                .findByPostedBy(userId, pageable)
-                .map(PostMapper::toDomain);
+                .findByPostedByAndIsDeletedFalse(userId, pageable);
     }
 
     @Override
     public List<PostEntity> findRecommendedFeed(Integer userId) {
         return jpa.findRecommendedFeed(userId)
                 .stream()
+                .filter(p -> p.getIsDeleted() == false)
                 .map(PostMapper::toDomain)
                 .toList();
     }

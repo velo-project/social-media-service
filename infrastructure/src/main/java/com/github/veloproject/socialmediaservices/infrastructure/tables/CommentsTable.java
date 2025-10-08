@@ -34,6 +34,11 @@ public class CommentsTable {
     @Column(name = "commented_at", nullable = false, updatable = false)
     private LocalDateTime commentedAt;
 
+    @Column(
+            name = "deleted_comment"
+    )
+    private Boolean isDeleted;
+
     public CommentsTable(Integer id, Integer postId, Integer commentedBy, String content, LocalDateTime commentedAt) {
         this.id = id;
         this.postId = postId;

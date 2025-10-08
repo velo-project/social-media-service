@@ -8,7 +8,7 @@ public class CommunityMapper {
     public static CommunitiesTable toPersistence(CommunityEntity e) {
         if (e == null) return null;
 
-        return new CommunitiesTable(
+        var community = new CommunitiesTable(
                 e.getId(),
                 e.getName(),
                 e.getDescription(),
@@ -16,6 +16,9 @@ public class CommunityMapper {
                 e.getCreatedBy(),
                 e.getCreatedAt()
         );
+        e.setIsDeleted(e.getIsDeleted());
+
+        return community;
     }
 
     public static CommunityEntity toDomain(CommunitiesTable t) {
@@ -28,6 +31,7 @@ public class CommunityMapper {
                 .embeddings(t.getEmbeddings())
                 .createdBy(t.getCreatedBy())
                 .createdAt(t.getCreatedAt())
+                .isDeleted(t.getIsDeleted())
                 .build();
     }
 

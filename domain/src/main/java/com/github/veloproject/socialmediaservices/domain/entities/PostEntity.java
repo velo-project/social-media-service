@@ -23,4 +23,5 @@ public class PostEntity {
     private Integer postedBy;
     @Setter(AccessLevel.PRIVATE)
     private CommunityEntity postedIn;
+    private Boolean isDeleted;
 }

@@ -15,13 +15,16 @@ public class PostMapper {
                 .map(HashtagMapper::toPersistence)
                 .collect(Collectors.toSet());
 
-        return new PostsTable(
+        var table = new PostsTable(
                 e.getId(),
                 e.getContent(),
                 e.getPostedBy(),
                 postedInMapped,
                 hashtagsMapped
         );
+        table.setIsDeleted(e.getIsDeleted());
+
+        return table;
     }
 
     public static PostEntity toDomain(PostsTable t) {
@@ -40,6 +43,7 @@ public class PostMapper {
                 .postedAt(t.getPostedAt())
                 .postedBy(t.getPostedBy())
                 .hashtags(hashtagsMapped)
+                .isDeleted(t.getIsDeleted())
                 .build();
     }
 }

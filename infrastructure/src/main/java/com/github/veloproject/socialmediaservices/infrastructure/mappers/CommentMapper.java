@@ -7,13 +7,16 @@ public class CommentMapper {
     public static CommentsTable toPersistence(CommentEntity e) {
         if (e == null) return null;
 
-        return new CommentsTable(
+        var comment = new CommentsTable(
                 e.getId(),
                 e.getPostId(),
                 e.getCommentedBy(),
                 e.getContent(),
                 e.getCommentedAt()
         );
+        comment.setIsDeleted(e.getIsDeleted());
+
+        return comment;
     }
 
     public static CommentEntity toDomain(CommentsTable t) {
@@ -25,6 +28,7 @@ public class CommentMapper {
                 .commentedBy(t.getCommentedBy())
                 .content(t.getContent())
                 .commentedAt(t.getCommentedAt())
+                .isDeleted(t.getIsDeleted())
                 .build();
     }
 }

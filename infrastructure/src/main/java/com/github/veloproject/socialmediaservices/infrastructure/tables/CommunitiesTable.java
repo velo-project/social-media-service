@@ -57,6 +57,11 @@ public class CommunitiesTable {
     )
     private LocalDateTime createdAt;
 
+    @Column(
+            name = "deleted_community"
+    )
+    private Boolean isDeleted;
+
     public CommunitiesTable(Integer id, String name, String description, float[] embeddings, Integer createdBy, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
