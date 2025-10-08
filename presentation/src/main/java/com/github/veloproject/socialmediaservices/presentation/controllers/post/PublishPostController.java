@@ -5,6 +5,7 @@ import com.github.veloproject.socialmediaservices.application.commands.post.publ
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -20,21 +21,18 @@ public class PublishPostController {
         this.mediator = mediator;
     }
 
-    @PostMapping("/v1/publish")
+    @PostMapping(value = "/v1/publish")
     public ResponseEntity<PublishPostCommandResult> publishPost(
-            @Valid PublishPostForm postForm,
-            @RequestParam("image") MultipartFile image,
+            @RequestParam @Valid @NotBlank @Size(max = 355) String content,
+            @RequestParam(required = false) Integer postedIn,
+            @RequestPart(value = "image", required = false) MultipartFile image,
             JwtAuthenticationToken token
     ) {
-        var command =  new PublishPostCommand(postForm.content, postForm.postedIn, image);
+        var command =  new PublishPostCommand(content, postedIn, image);
         var response = mediator.send(command, token);
 
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body(response);
     }
-
-    public record PublishPostForm(
-            @NotBlank @Size( max = 355 ) String content,
-            Integer postedIn) {}
 }
