@@ -33,6 +33,13 @@ public class PostsTable {
     private String content;
 
     @Column(
+            name = "image_post",
+            nullable = true,
+            columnDefinition = "TEXT"
+    )
+    private String imageUrl;
+
+    @Column(
             name = "posted_by",
             updatable = false,
             nullable = false

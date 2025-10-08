@@ -8,6 +8,7 @@ import com.github.veloproject.socialmediaservices.application.mediators.contract
 import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntity;
 import com.github.veloproject.socialmediaservices.domain.entities.HashtagEntity;
 import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
+import com.github.veloproject.socialmediaservices.domain.exceptions.InternalErrorException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidCommunityProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidUserProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.UserNotInCommunityException;
@@ -15,6 +16,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
@@ -28,19 +30,22 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
     private final IUserGRPCClient userServices;
     private final ICommunityMemberRepository communityMemberRepository;
     private final IHashtagRepository hashtagRepository;
+    private final IImageFileService imageService;
 
     public PublishPostCommandHandler(
             IPostRepository postRepository,
             ICommunityRepository communityRepository,
             IUserGRPCClient userServices,
             ICommunityMemberRepository communityMemberRepository,
-            IHashtagRepository hashtagRepository
+            IHashtagRepository hashtagRepository,
+            IImageFileService imageService
     ) {
         this.postRepository = postRepository;
         this.communityRepository = communityRepository;
         this.userServices = userServices;
         this.communityMemberRepository = communityMemberRepository;
         this.hashtagRepository = hashtagRepository;
+        this.imageService = imageService;
     }
 
     @Transactional
@@ -52,7 +57,6 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
 
         if (community != null)
             if (!communityMemberRepository.existsMember(community.getId(), user.id())) throw new UserNotInCommunityException();
-
         var hashtags = extractHashtagsFromContent(request.content());
 
         var post = PostEntity.builder()
@@ -61,6 +65,17 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
                 .postedIn(community)
                 .hashtags(hashtags)
                 .build();
+
+        if (request.optionalImage() != null) {
+            try {
+                String path = imageService.uploadImage(
+                        request.optionalImage(),
+                        user.id());
+                post.setImageUrl(path);
+            } catch (IOException e) {
+                throw new InternalErrorException("Error while reading image.");
+            }
+        }
 
         var savedPost = postRepository.save(post);
 

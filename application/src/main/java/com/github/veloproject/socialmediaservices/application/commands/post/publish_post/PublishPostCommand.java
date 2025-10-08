@@ -3,9 +3,11 @@ package com.github.veloproject.socialmediaservices.application.commands.post.pub
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 public record PublishPostCommand(
-        @NotBlank @Size( max = 355 ) String content,
-        Integer postedIn
+        String content,
+        Integer postedIn,
+        MultipartFile optionalImage
 ) implements Request<PublishPostCommandResult> {
 }

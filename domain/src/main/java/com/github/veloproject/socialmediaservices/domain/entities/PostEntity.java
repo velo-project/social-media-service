@@ -14,6 +14,7 @@ import java.util.Set;
 public class PostEntity {
     private Integer id;
     private String content;
+    private String imageUrl;
     private Set<HashtagEntity> hashtags;
 
     @Setter(AccessLevel.PRIVATE)
