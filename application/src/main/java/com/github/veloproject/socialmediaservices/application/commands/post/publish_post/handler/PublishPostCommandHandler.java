@@ -25,14 +25,14 @@ import java.util.regex.Pattern;
 public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCommand, PublishPostCommandResult> {
     private final IPostRepository postRepository;
     private final ICommunityRepository communityRepository;
-    private final IUserServices userServices;
+    private final IUserGRPCClient userServices;
     private final ICommunityMemberRepository communityMemberRepository;
     private final IHashtagRepository hashtagRepository;
 
     public PublishPostCommandHandler(
             IPostRepository postRepository,
             ICommunityRepository communityRepository,
-            IUserServices userServices,
+            IUserGRPCClient userServices,
             ICommunityMemberRepository communityMemberRepository,
             IHashtagRepository hashtagRepository
     ) {

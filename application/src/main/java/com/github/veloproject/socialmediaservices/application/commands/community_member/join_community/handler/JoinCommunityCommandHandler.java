@@ -2,7 +2,7 @@ package com.github.veloproject.socialmediaservices.application.commands.communit
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityMemberRepository;
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityRepository;
-import com.github.veloproject.socialmediaservices.application.abstractions.IUserServices;
+import com.github.veloproject.socialmediaservices.application.abstractions.IUserGRPCClient;
 import com.github.veloproject.socialmediaservices.application.commands.community_member.join_community.JoinCommunityCommand;
 import com.github.veloproject.socialmediaservices.application.commands.community_member.join_community.JoinCommunityCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 public class JoinCommunityCommandHandler extends AuthRequestHandler<JoinCommunityCommand, JoinCommunityCommandResult> {
     private final ICommunityMemberRepository communityMemberRepository;
     private final ICommunityRepository communityRepository;
-    private final IUserServices  userServices;
+    private final IUserGRPCClient userServices;
 
-    public JoinCommunityCommandHandler(ICommunityMemberRepository communityMemberRepository, ICommunityRepository communityRepository, IUserServices userServices) {
+    public JoinCommunityCommandHandler(ICommunityMemberRepository communityMemberRepository,
+                                       ICommunityRepository communityRepository,
+                                       IUserGRPCClient userServices) {
         this.communityMemberRepository = communityMemberRepository;
         this.communityRepository = communityRepository;
         this.userServices = userServices;
@@ -32,7 +34,7 @@ public class JoinCommunityCommandHandler extends AuthRequestHandler<JoinCommunit
                                              JwtAuthenticationToken token) {
         var integerSubject = Integer.valueOf(token.getToken().getSubject());
         if (!userServices
-                .existsById(integerSubject)) throw new InvalidUserProvidedException();
+                .existsByUserId(integerSubject)) throw new InvalidUserProvidedException();
         else if (!communityRepository
                 .existsById(request.communityId())) throw new InvalidCommunityProvidedException();
         else if (communityMemberRepository

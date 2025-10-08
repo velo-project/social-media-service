@@ -17,7 +17,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         basePackages = "com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa"
 )
 public class PresentationApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(PresentationApplication.class, args);
     }

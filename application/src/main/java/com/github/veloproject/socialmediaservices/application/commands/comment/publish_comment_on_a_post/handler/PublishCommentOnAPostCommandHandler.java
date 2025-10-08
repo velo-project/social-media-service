@@ -2,7 +2,7 @@ package com.github.veloproject.socialmediaservices.application.commands.comment.
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommentRepository;
 import com.github.veloproject.socialmediaservices.application.abstractions.IPostRepository;
-import com.github.veloproject.socialmediaservices.application.abstractions.IUserServices;
+import com.github.veloproject.socialmediaservices.application.abstractions.IUserGRPCClient;
 import com.github.veloproject.socialmediaservices.application.commands.comment.publish_comment_on_a_post.PublishCommentOnAPostCommand;
 import com.github.veloproject.socialmediaservices.application.commands.comment.publish_comment_on_a_post.PublishCommentOnAPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.dto.UserInfo;
@@ -20,11 +20,11 @@ import java.util.Optional;
 public class PublishCommentOnAPostCommandHandler
         extends AuthRequestHandler<PublishCommentOnAPostCommand, PublishCommentOnAPostCommandResult> {
     private final ICommentRepository commentRepository;
-    private final IUserServices userServices;
+    private final IUserGRPCClient userServices;
     private final IPostRepository postRepository;
 
     public PublishCommentOnAPostCommandHandler(ICommentRepository commentRepository,
-                                               IUserServices userServices,
+                                               IUserGRPCClient userServices,
                                                IPostRepository postRepository) {
         this.commentRepository = commentRepository;
         this.userServices = userServices;

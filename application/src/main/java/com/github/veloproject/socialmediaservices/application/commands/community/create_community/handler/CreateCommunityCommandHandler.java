@@ -2,7 +2,7 @@ package com.github.veloproject.socialmediaservices.application.commands.communit
 
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityMemberRepository;
 import com.github.veloproject.socialmediaservices.application.abstractions.ICommunityRepository;
-import com.github.veloproject.socialmediaservices.application.abstractions.IUserServices;
+import com.github.veloproject.socialmediaservices.application.abstractions.IUserGRPCClient;
 import com.github.veloproject.socialmediaservices.application.commands.community.create_community.CreateCommunityCommand;
 import com.github.veloproject.socialmediaservices.application.commands.community.create_community.CreateCommunityCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateCommunityCommandHandler extends AuthRequestHandler<CreateCommunityCommand, CreateCommunityCommandResult> {
     private final ICommunityRepository communityRepository;
-    private final IUserServices userServices;
+    private final IUserGRPCClient userServices;
     private final ICommunityMemberRepository communityMemberRepository;
 
     public CreateCommunityCommandHandler(ICommunityRepository communityRepository,
-                                         IUserServices userServices,
+                                         IUserGRPCClient userServices,
                                          ICommunityMemberRepository communityMemberRepository) {
         this.communityRepository = communityRepository;
         this.userServices = userServices;
@@ -31,7 +31,7 @@ public class CreateCommunityCommandHandler extends AuthRequestHandler<CreateComm
     @Transactional
     public CreateCommunityCommandResult handle(CreateCommunityCommand request, JwtAuthenticationToken token) {
         var integerSubject = Integer.valueOf(token.getToken().getSubject());
-        var userExists = userServices.existsById(integerSubject);
+        var userExists = userServices.existsByUserId(integerSubject);
         if (!userExists)
             throw new InvalidUserProvidedException();
 
