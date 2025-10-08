@@ -40,6 +40,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
+    implementation 'net.devh:grpc-server-spring-boot-starter:3.0.0.RELEASE'
+    implementation 'net.devh:grpc-client-spring-boot-starter:3.0.0.RELEASE'
+
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
 
