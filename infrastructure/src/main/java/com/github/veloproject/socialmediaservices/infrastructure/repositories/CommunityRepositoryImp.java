@@ -5,7 +5,6 @@ import com.github.veloproject.socialmediaservices.application.dto.CommunityDto;
 import com.github.veloproject.socialmediaservices.domain.entities.CommunityEntity;
 import com.github.veloproject.socialmediaservices.infrastructure.mappers.CommunityMapper;
 import com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa.ICommunityRepositoryJpa;
-import com.github.veloproject.socialmediaservices.infrastructure.tables.CommunitiesTable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,7 +20,8 @@ public class CommunityRepositoryImp implements ICommunityRepository {
 
     @Override
     public Optional<CommunityEntity> findById(Integer id) {
-        var community = jpa.findById(id);
+        var community = jpa.findById(id)
+                .filter(c -> c.getIsDeleted() == false);
 
         return community.map(CommunityMapper::toDomain);
     }
