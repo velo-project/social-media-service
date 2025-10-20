@@ -3,13 +3,14 @@ package com.github.veloproject.socialmediaservices.application.queries.post.get_
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.Response;
 import com.github.veloproject.socialmediaservices.domain.entities.PostEntity;
 import lombok.Getter;
-import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 @Getter
 public class GetPostsByUserIdQueryResult extends Response {
-    private final Page<PostEntity> posts;
+    private final List<PostEntity> posts;
 
-    public GetPostsByUserIdQueryResult(Integer statusCode, Page<PostEntity> posts) {
+    public GetPostsByUserIdQueryResult(Integer statusCode, List<PostEntity> posts) {
         super(statusCode);
         this.posts = posts;
     }
