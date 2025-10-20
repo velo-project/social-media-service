@@ -3,6 +3,7 @@ package com.github.veloproject.socialmediaservices.presentation.controllers.comm
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
 import com.github.veloproject.socialmediaservices.application.queries.community.get_communities_by_similarity.FilterCommunitiesBySimilarityQuery;
 import com.github.veloproject.socialmediaservices.application.queries.community.get_communities_by_similarity.FilterCommunitiesBySimilarityQueryResult;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class FilterCommunitiesBySimilarityController {
 
     @GetMapping("/v1/search")
     public ResponseEntity<FilterCommunitiesBySimilarityQueryResult> searchCommunitiesBySimilarity(
-            @RequestParam @NotNull String queryContent
+            @RequestParam @Valid @NotNull String queryContent
     ) {
         var query = new FilterCommunitiesBySimilarityQuery(queryContent);
         var response = mediator.send(query);
