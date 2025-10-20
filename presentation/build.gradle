@@ -103,9 +103,9 @@ tasks.named('test') {
 }
 
 flyway {
-    url = 'jdbc:postgresql://db:5432/social_media_services'
+    url = 'jdbc:postgresql://db:5433/social_media_services'
     user = 'postgres'
     password = 'root'
-    locations = ['filesystem:presentations/src/main/resources/db/migration']
+    locations = ['filesystem:presentation/src/main/resources/db/migration']
     table = 'social_media_services_flyway_schema_history'
 }
