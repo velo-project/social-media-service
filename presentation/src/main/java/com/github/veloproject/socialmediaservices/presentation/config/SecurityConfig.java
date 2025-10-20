@@ -48,7 +48,8 @@ public class SecurityConfig {
                                 "/api/social_media/feeds/v1/feed",
                                 "/api/social_media/following/v1/*",
                                 "/api/social_media/followers/v1/*",
-                                "/api/social_media/communities/v1/search"
+                                "/api/social_media/communities/v1/search",
+                                "/api/social_media/comments/v1/*"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.DELETE,
