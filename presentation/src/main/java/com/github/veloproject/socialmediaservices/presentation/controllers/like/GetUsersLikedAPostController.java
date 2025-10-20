@@ -5,6 +5,7 @@ import com.github.veloproject.socialmediaservices.application.queries.like.get_u
 import com.github.veloproject.socialmediaservices.application.queries.like.get_users_liked_a_post.GetUsersLikedAPostQueryResult;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class GetUsersLikedAPostController {
     @GetMapping("/v1/{postId}")
     public ResponseEntity<GetUsersLikedAPostQueryResult> getUsersLikedAPost(
             @PathVariable @Valid @Positive Integer postId,
-            @RequestParam @Valid @Positive Integer page
+            @RequestParam @Valid @PositiveOrZero Integer page
             ) {
         var query = new GetUsersLikedAPostQuery(postId, page);
         var response = mediator.send(query);

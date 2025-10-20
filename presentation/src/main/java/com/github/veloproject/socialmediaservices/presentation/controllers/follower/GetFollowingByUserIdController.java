@@ -5,6 +5,7 @@ import com.github.veloproject.socialmediaservices.application.queries.follower.g
 import com.github.veloproject.socialmediaservices.application.queries.follower.get_following_by_user_id.GetFollowingByUserIdQueryResult;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class GetFollowingByUserIdController {
 
     @GetMapping("/v1/{userId}")
     public ResponseEntity<GetFollowingByUserIdQueryResult> getFollowing(@PathVariable @Valid @Positive Integer userId,
-                                                                        @RequestParam @Valid @Positive Integer page) {
+                                                                        @RequestParam @Valid @PositiveOrZero Integer page) {
         var query = new GetFollowingByUserIdQuery(userId, page);
         var response = mediator.send(query);
 
