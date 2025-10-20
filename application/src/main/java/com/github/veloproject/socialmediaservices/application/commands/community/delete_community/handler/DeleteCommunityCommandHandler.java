@@ -26,9 +26,9 @@ public class DeleteCommunityCommandHandler extends AuthRequestHandler<DeleteComm
                 .orElseThrow(InvalidCommunityProvidedException::new);
 
         var userId = Integer.valueOf(token.getToken().getSubject());
-        if (!community.getCreatedBy().equals(userId)) {
-            throw new UserNotAuthorException();
-        }
+
+        if (!community.getCreatedBy().equals(userId)) throw new UserNotAuthorException();
+        else if (community.getIsDeleted()) throw new InvalidCommunityProvidedException();
 
         communityRepository.deleteById(request.id());
 
