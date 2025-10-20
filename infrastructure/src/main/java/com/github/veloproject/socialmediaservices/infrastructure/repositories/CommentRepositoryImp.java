@@ -46,10 +46,7 @@ public class CommentRepositoryImp implements ICommentRepository {
 
     @Override
     public List<CommentEntity> findByPostId(Integer postId, Pageable pageable) {
-        return jpa.findByPostId(postId, pageable)
-                .toList()
-                .stream()
-                .filter(c -> c.getIsDeleted() == false)
+        return jpa.findByPostIdAndIsDeletedFalse(postId, pageable)
                 .map(CommentMapper::toDomain)
                 .toList();
     }
