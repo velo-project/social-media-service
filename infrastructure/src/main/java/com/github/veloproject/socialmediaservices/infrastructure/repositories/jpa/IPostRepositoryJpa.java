@@ -44,5 +44,5 @@ LIMIT 50;
 
     boolean existsByIdAndIsDeletedFalse(Integer id);
 
-    Page<PostEntity> findByPostedByAndIsDeletedFalse(Integer postedBy, Pageable pageable);
+    Page<PostsTable> findByPostedByAndIsDeletedFalse(Integer postedBy, Pageable pageable);
 }
