@@ -19,9 +19,8 @@ public class GetRecommendedFeedController {
         this.mediator = mediator;
     }
 
-    @GetMapping("/v1/feed/{userId}")
+    @GetMapping("/v1/feed")
     public ResponseEntity<GetRecommendedFeedQueryResult> getRecommendedFeed(
-            @PathVariable Integer userId,
             JwtAuthenticationToken token
     ) {
         var query = new GetRecommendedFeedQuery();
