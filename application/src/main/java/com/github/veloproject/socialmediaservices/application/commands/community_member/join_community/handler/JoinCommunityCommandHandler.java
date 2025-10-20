@@ -38,7 +38,7 @@ public class JoinCommunityCommandHandler extends AuthRequestHandler<JoinCommunit
         else if (!communityRepository
                 .existsById(request.communityId())) throw new InvalidCommunityProvidedException();
         else if (communityMemberRepository
-                .existsMember(integerSubject, request.communityId())) throw new UserAlreadyInCommunityException();
+                .existsMember(request.communityId(), integerSubject)) throw new UserAlreadyInCommunityException();
 
         var communityMember = CommunityMemberEntity.builder()
                         .communityId(request.communityId())

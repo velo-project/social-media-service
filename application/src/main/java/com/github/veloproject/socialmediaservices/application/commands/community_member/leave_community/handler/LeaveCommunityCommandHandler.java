@@ -43,7 +43,7 @@ public class LeaveCommunityCommandHandler extends AuthRequestHandler<LeaveCommun
                 .equals(integerSubject)) throw new UserIsTheCommunityOwnerException();
 
         else if (!communityMemberRepository
-                .existsMember(integerSubject, request.communityId())) throw new UserNotInCommunityException();
+                .existsMember(request.communityId(), integerSubject)) throw new UserNotInCommunityException();
 
         communityMemberRepository.delete(request.communityId(), integerSubject);
         return new LeaveCommunityCommandResult(200);
