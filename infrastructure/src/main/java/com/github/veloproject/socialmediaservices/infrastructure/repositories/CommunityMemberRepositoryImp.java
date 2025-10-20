@@ -40,7 +40,7 @@ public class CommunityMemberRepositoryImp implements ICommunityMemberRepository 
     }
 
     @Override
-    public Page<CommunityMemberEntity> findMembersByCommunityId(Integer communityId, Pageable pageable) {
+    public Page<CommunityMemberEntity> findByCommunityId(Integer communityId, Pageable pageable) {
         return jpa.findByCommunityId(communityId, pageable)
                 .map(CommunityMemberMapper::toDomain);
     }

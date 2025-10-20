@@ -11,6 +11,6 @@ public interface ICommunityMemberRepository {
     void delete(Integer communityId, Integer userId);
     boolean existsMember(Integer communityId, Integer userId);
     long countMembers(Integer communityId);
-    Page<CommunityMemberEntity> findMembersByCommunityId(Integer communityId, Pageable pageable);
+    Page<CommunityMemberEntity> findByCommunityId(Integer communityId, Pageable pageable);
     Optional<CommunityMemberEntity> findMember(Integer communityId, Integer userId);
 }

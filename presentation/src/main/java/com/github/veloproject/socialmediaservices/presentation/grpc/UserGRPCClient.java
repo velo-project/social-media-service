@@ -7,6 +7,11 @@ import io.grpc.StatusRuntimeException;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
 @Service
 public class UserGRPCClient implements IUserGRPCClient {
     @GrpcClient("user-services")
@@ -53,4 +58,43 @@ public class UserGRPCClient implements IUserGRPCClient {
             }
         }
     }
+
+    @Override
+    public List<UserInfo> getUsersByIdList(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        try {
+            GetUsersByIdListRequest request = GetUsersByIdListRequest.newBuilder()
+                    .addAllId(ids)
+                    .build();
+
+            GetUsersByIdListResponse response = userServiceStub
+                    .withDeadlineAfter(5, TimeUnit.SECONDS)
+                    .getUsersByIdList(request);
+
+            if (response == null || response.getUserCount() == 0) {
+                return Collections.emptyList();
+            }
+
+            return response.getUserList().stream()
+                    .map(user -> new UserInfo(
+                            user.getId(),
+                            user.getName(),
+                            user.getNickname(),
+                            user.getBannerPhotoUrl(),
+                            user.getProfilePhotoUrl(),
+                            user.getIsBlocked(),
+                            user.getIsDeleted()))
+                    .collect(Collectors.toList());
+
+        } catch (StatusRuntimeException e) {
+            if (e.getStatus().getCode() == Status.Code.NOT_FOUND) {
+                return Collections.emptyList();
+            }
+            throw e;
+        }
+    }
+
 }

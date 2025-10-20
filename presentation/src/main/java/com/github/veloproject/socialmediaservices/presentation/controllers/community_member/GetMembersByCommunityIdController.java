@@ -5,6 +5,7 @@ import com.github.veloproject.socialmediaservices.application.queries.community_
 import com.github.veloproject.socialmediaservices.application.queries.community_member.get_members_by_community_id.GetMembersByCommunityIdQueryResult;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,8 @@ public class GetMembersByCommunityIdController {
     @GetMapping("/v1/members/{communityId}")
     public ResponseEntity<GetMembersByCommunityIdQueryResult> getMembersByCommunityId(
             @PathVariable @Valid @Positive Integer communityId,
-            @RequestParam @Valid @Positive Integer page
-    ) {
+            @RequestParam @Valid @PositiveOrZero Integer page
+            ) {
         var query = new GetMembersByCommunityIdQuery(communityId, page);
         var response = mediator.send(query);
         return ResponseEntity
