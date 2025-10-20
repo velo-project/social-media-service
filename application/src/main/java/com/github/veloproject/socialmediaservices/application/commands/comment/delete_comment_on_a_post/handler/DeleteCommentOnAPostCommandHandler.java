@@ -4,7 +4,7 @@ import com.github.veloproject.socialmediaservices.application.abstractions.IComm
 import com.github.veloproject.socialmediaservices.application.commands.comment.delete_comment_on_a_post.DeleteCommentOnAPostCommand;
 import com.github.veloproject.socialmediaservices.application.commands.comment.delete_comment_on_a_post.DeleteCommentOnAPostCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.contracts.handlers.AuthRequestHandler;
-import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidPostProvidedException;
+import com.github.veloproject.socialmediaservices.domain.exceptions.InvalidCommentProvidedException;
 import com.github.veloproject.socialmediaservices.domain.exceptions.UserNotAuthorException;
 import jakarta.transaction.Transactional;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -22,7 +22,7 @@ public class DeleteCommentOnAPostCommandHandler extends AuthRequestHandler<Delet
     @Override
     public DeleteCommentOnAPostCommandResult handle(DeleteCommentOnAPostCommand request, JwtAuthenticationToken token) {
         var comment = commentRepository
-                .findById(request.commentId()).orElseThrow(InvalidPostProvidedException::new);
+                .findById(request.commentId()).orElseThrow(InvalidCommentProvidedException::new);
 
         var userId = Integer.valueOf(token.getToken().getSubject());
         if (!comment.getCommentedBy().equals(userId))
