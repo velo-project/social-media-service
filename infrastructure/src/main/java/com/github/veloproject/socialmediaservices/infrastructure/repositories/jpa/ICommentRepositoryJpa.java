@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ICommentRepositoryJpa extends JpaRepository<CommentsTable, Integer> {
-    Page<CommentsTable> findByPostId(Integer postId, Pageable pageable);
+    Page<CommentsTable> findByPostIdAndIsDeletedFalse(Integer postId, Pageable pageable);
     long countByPostIdAndIsDeletedFalse(Integer postId);
 }
