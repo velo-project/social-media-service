@@ -12,6 +12,6 @@ public interface IPostRepository {
     void deleteById(Integer postId);
     Optional<PostEntity> findById(Integer id);
     boolean existsById(Integer postId);
-    Page<PostEntity> findPageByUserId(Integer userId, Pageable pageable);
+    Page<PostEntity> findByUserId(Integer userId, Pageable pageable);
     List<PostEntity> findRecommendedFeed(Integer userId);
 }

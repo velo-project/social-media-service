@@ -53,9 +53,10 @@ public class PostRepositoryImp implements IPostRepository {
     }
 
     @Override
-    public Page<PostEntity> findPageByUserId(Integer userId, Pageable pageable) {
+    public Page<PostEntity> findByUserId(Integer userId, Pageable pageable) {
         return jpa
-                .findByPostedByAndIsDeletedFalse(userId, pageable);
+                .findByPostedByAndIsDeletedFalse(userId, pageable)
+                .map(PostMapper::toDomain);
     }
 
     @Override
