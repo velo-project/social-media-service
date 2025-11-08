@@ -1,0 +1,1 @@
+ALTER TABLE tb_hashtags DROP COLUMN usage_count_hashtag;

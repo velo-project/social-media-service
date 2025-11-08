@@ -1,0 +1,10 @@
+package com.github.veloproject.socialmediaservices.application.commands.comment.delete_comment_on_a_post;
+
+import com.github.veloproject.socialmediaservices.application.mediators.contracts.Request;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+public record DeleteCommentOnAPostCommand(
+        @NotNull @Positive Integer commentId
+) implements Request<DeleteCommentOnAPostCommandResult> {
+}

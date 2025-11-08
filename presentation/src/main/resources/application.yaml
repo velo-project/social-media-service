@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: SocialMediaServices
+  flyway:
+    table: social_media_services_flyway_schema_history
+    locations: classpath:db/migration
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DATABASE}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+jwt:
+  public:
+    key: file:${RSA_PUBLIC_KEY}
+
+grpc:
+  client:
+    user-services:
+      address: 'u-app:9090'
+      negotiationType: plaintext
+
+gcp:
+  credentials:
+    file: ${GOOGLE_CLOUD_CREDENTIALS}
+  project-id: ${GOOGLE_CLOUD_PROJECT}
+  bucket: ${GOOGLE_CLOUD_BUCKET}
+
+gemini:
+  api:
+    key: ${GEMINI_API_KEY}
+
+    embedding:
+      model: ${GEMINI_EMBEDDING_MODEL}
+
+springdoc:
+  api-docs:
+    path: /api/social_media/docs/api-docs
+  swagger-ui:
+    path: /api/social_media/docs/
+    config-url: /api/social_media/docs/api-docs/swagger-config
+    urls:
+      - name: sm-service
+        url: /api/social_media/docs/api-docs
