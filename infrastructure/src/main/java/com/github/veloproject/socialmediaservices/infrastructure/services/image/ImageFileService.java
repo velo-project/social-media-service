@@ -16,9 +16,10 @@ import java.util.UUID;
 
 @Service
 public class ImageFileService implements IImageFileService {
+
     private final Storage storage;
 
-    @Value("g${gcp.bucket}")
+    @Value("${gcp.bucket}")
     private String bucketName;
 
     public ImageFileService(Storage storage) {
