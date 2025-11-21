@@ -37,6 +37,18 @@ public class CommunitiesTable {
     )
     private String description;
 
+    @Column(
+            name = "photo_url_community",
+            columnDefinition = "TEXT"
+    )
+    private String photoUrl;
+
+    @Column(
+            name = "banner_url_community",
+            columnDefinition = "TEXT"
+    )
+    private String bannerUrl;
+
     @JdbcTypeCode(SqlTypes.VECTOR)
     @Column(
             name = "embeddings_community",
@@ -62,10 +74,19 @@ public class CommunitiesTable {
     )
     private Boolean isDeleted;
 
-    public CommunitiesTable(Integer id, String name, String description, float[] embeddings, Integer createdBy, LocalDateTime createdAt) {
+    public CommunitiesTable(Integer id,
+                            String name,
+                            String description,
+                            String photoUrl,
+                            String bannerUrl,
+                            float[] embeddings,
+                            Integer createdBy,
+                            LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.photoUrl = photoUrl;
+        this.bannerUrl = bannerUrl;
         this.embeddings = embeddings;
         this.createdBy = createdBy;
         this.createdAt = createdAt;

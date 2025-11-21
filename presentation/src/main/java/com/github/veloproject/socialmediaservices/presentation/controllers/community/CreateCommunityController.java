@@ -3,13 +3,12 @@ package com.github.veloproject.socialmediaservices.presentation.controllers.comm
 import com.github.veloproject.socialmediaservices.application.commands.community.create_community.CreateCommunityCommand;
 import com.github.veloproject.socialmediaservices.application.commands.community.create_community.CreateCommunityCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/social_media/communities")
@@ -20,12 +19,15 @@ public class CreateCommunityController {
         this.mediator = mediator;
     }
 
-    // TODO Imagens (Banner & Foto)
     @PostMapping("/v1/create")
     public ResponseEntity<CreateCommunityCommandResult> createCommunity(
-            @RequestBody @Valid CreateCommunityCommand command,
+            @RequestParam(required = true) @NotBlank @Size(min = 3, max = 25) String name,
+            @RequestParam(required = true) @NotBlank @Size(min = 1, max = 255) String description,
+            @RequestParam(value = "photo", required = false) MultipartFile photo,
+            @RequestParam(value = "banner", required = false) MultipartFile banner,
             JwtAuthenticationToken token
     ) {
+        var command = new CreateCommunityCommand(name, description, photo, banner);
         var response = mediator.send(command, token);
 
         return ResponseEntity

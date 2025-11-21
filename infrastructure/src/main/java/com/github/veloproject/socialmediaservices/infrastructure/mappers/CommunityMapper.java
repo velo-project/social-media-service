@@ -12,6 +12,8 @@ public class CommunityMapper {
                 e.getId(),
                 e.getName(),
                 e.getDescription(),
+                e.getPhotoUrl(),
+                e.getBannerUrl(),
                 e.getEmbeddings(),
                 e.getCreatedBy(),
                 e.getCreatedAt()
@@ -28,6 +30,8 @@ public class CommunityMapper {
                 .id(t.getId())
                 .name(t.getName())
                 .description(t.getDescription())
+                .photoUrl(t.getPhotoUrl())
+                .bannerUrl(t.getBannerUrl())
                 .embeddings(t.getEmbeddings())
                 .createdBy(t.getCreatedBy())
                 .createdAt(t.getCreatedAt())
@@ -41,6 +45,8 @@ public class CommunityMapper {
         return new CommunityDto(
                 t.getId(),
                 t.getName(),
+                t.getPhotoUrl(),
+                t.getBannerUrl(),
                 t.getDescription(),
                 t.getCreatedBy(),
                 t.getCreatedAt()
