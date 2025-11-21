@@ -83,9 +83,10 @@ public class PostsTable {
     )
     private Boolean isDeleted;
 
-    public PostsTable(Integer id, String content, Integer postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags) {
+    public PostsTable(Integer id, String content, String imageUrl, Integer postedBy, CommunitiesTable postedIn, Set<HashtagsTable> hashtags) {
         this.id = id;
         this.content = content;
+        this.imageUrl = imageUrl;
         this.postedBy = postedBy;
         this.postedIn = postedIn;
         this.hashtags = hashtags;

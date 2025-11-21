@@ -18,6 +18,7 @@ public class PostMapper {
         var table = new PostsTable(
                 e.getId(),
                 e.getContent(),
+                e.getImageUrl(),
                 e.getPostedBy(),
                 postedInMapped,
                 hashtagsMapped
@@ -41,6 +42,7 @@ public class PostMapper {
                 .content(t.getContent())
                 .postedIn(postedInMapped)
                 .postedAt(t.getPostedAt())
+                .imageUrl(t.getImageUrl())
                 .postedBy(t.getPostedBy())
                 .hashtags(hashtagsMapped)
                 .isDeleted(t.getIsDeleted())
