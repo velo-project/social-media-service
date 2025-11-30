@@ -37,6 +37,7 @@ services:
       GOOGLE_CLOUD_BUCKET: ${GOOGLE_CLOUD_BUCKET}
       GEMINI_API_KEY: ${GEMINI_API_KEY}
       GEMINI_EMBEDDING_MODEL: ${GEMINI_EMBEDDING_MODEL}
+      SENTRY_DSN: ${SENTRY_DSN}
       RSA_PUBLIC_KEY: /run/secrets/app.pub
     volumes:
       - type: bind
