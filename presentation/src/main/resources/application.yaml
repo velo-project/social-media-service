@@ -24,7 +24,7 @@ jwt:
 grpc:
   client:
     user-services:
-      address: 'u-app:9090'
+      address: '${USER_GRPC_ADDRESS:u-app:9090}'
       negotiationType: plaintext
   server:
     port: ${GRPC_PORT:9090}
