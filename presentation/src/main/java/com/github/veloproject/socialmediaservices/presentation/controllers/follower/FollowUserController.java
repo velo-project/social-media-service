@@ -3,6 +3,7 @@ package com.github.veloproject.socialmediaservices.presentation.controllers.foll
 import com.github.veloproject.socialmediaservices.application.commands.follower.follow_user.FollowUserCommand;
 import com.github.veloproject.socialmediaservices.application.commands.follower.follow_user.FollowUserCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class FollowUserController {
 
     @PostMapping("/v1/follow")
     public ResponseEntity<FollowUserCommandResult> followUser(
-            @RequestBody FollowUserCommand command,
+            @RequestBody @Valid FollowUserCommand command,
             JwtAuthenticationToken token
     ) {
         var response = mediator.send(command, token);

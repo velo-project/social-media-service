@@ -4,9 +4,12 @@ import com.github.veloproject.socialmediaservices.domain.entities.UserFollowerEn
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface IUserFollowerRepository {
     void save(UserFollowerEntity entity);
     Page<UserFollowerEntity> findAllByUserId(Integer userId, Pageable pageable);
     Page<UserFollowerEntity> findAllByFollowerId(Integer userId, Pageable pageable);
     void delete(Integer userId, Integer followerId);
+    List<Integer> getFriends(Integer userId);
 }

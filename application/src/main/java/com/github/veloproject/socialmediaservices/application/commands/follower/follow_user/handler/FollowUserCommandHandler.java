@@ -26,15 +26,19 @@ public class FollowUserCommandHandler extends AuthRequestHandler<FollowUserComma
     @Override
     public FollowUserCommandResult handle(FollowUserCommand request,
                                           JwtAuthenticationToken token) {
-        var subject = Integer.valueOf(token.getToken().getSubject());
-        if (!userServices.existsByUserId(subject) || !userServices.existsByUserId(request.userId()))
+        var tokenObject = token.getToken();
+        var subject = Integer.valueOf(tokenObject.getSubject());
+        var userNickname = tokenObject.getClaim("nickname");
+
+        var following = userServices.getUserByNickname(request.nickname());
+        if (!userServices.existsByUserId(subject) || following == null)
             throw new InvalidUserProvidedException();
-        else if (request.userId().equals(subject))
+        else if (userNickname.equals(request.nickname()))
             throw new InvalidUserProvidedException();
 
         var entity = UserFollowerEntity.builder()
-                .userId(request.userId())
-                .followerId(subject)
+                .userId(following.id()) // Usuário a ser seguido
+                .followerId(subject) // Seguidor
                 .build();
         followerRepository.save(entity);
 

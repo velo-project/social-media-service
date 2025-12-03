@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserFollowerRepositoryImpl implements IUserFollowerRepository {
     private final IUserFollowerRepositoryJpa jpa;
@@ -39,5 +41,10 @@ public class UserFollowerRepositoryImpl implements IUserFollowerRepository {
     @Override
     public void delete(Integer userId, Integer followerId) {
         jpa.deleteByUserIdAndFollowerId(userId, followerId);
+    }
+
+    @Override
+    public List<Integer> getFriends(Integer userId) {
+        return jpa.getFriends(userId);
     }
 }

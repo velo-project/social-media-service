@@ -3,6 +3,8 @@ package com.github.veloproject.socialmediaservices.presentation.controllers.foll
 import com.github.veloproject.socialmediaservices.application.commands.follower.unfollow_user.UnfollowUserCommand;
 import com.github.veloproject.socialmediaservices.application.commands.follower.unfollow_user.UnfollowUserCommandResult;
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,10 +23,10 @@ public class UnfollowUserController {
 
     @DeleteMapping("/v1/unfollow")
     public ResponseEntity<UnfollowUserCommandResult> unfollowUser(
-            @RequestParam Integer userId,
+            @RequestParam @Valid @NotBlank String nickname,
             JwtAuthenticationToken token
     ) {
-        var command = new UnfollowUserCommand(userId);
+        var command = new UnfollowUserCommand(nickname);
         var response = mediator.send(command, token);
 
         return ResponseEntity
