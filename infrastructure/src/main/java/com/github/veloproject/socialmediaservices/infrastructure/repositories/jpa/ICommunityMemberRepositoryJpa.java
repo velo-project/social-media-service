@@ -1,6 +1,5 @@
 package com.github.veloproject.socialmediaservices.infrastructure.repositories.jpa;
 
-import aj.org.objectweb.asm.commons.Remapper;
 import com.github.veloproject.socialmediaservices.domain.valueObjects.CommunityMemberId;
 import com.github.veloproject.socialmediaservices.infrastructure.tables.CommunityMembersTable;
 import org.springframework.data.domain.Page;
@@ -8,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,4 +17,5 @@ public interface ICommunityMemberRepositoryJpa extends JpaRepository<CommunityMe
     long countByCommunityId(Integer communityId);
     Optional<CommunityMembersTable> findByCommunityIdAndUserId(Integer communityId, Integer userId);
     Page<CommunityMembersTable> findByCommunityId(Integer communityId, Pageable pageable);
+    List<CommunityMembersTable> findByUserId(Integer userId);
 }

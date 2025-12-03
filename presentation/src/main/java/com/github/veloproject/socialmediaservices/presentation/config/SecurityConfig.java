@@ -51,7 +51,8 @@ public class SecurityConfig {
                                 "/api/social_media/communities/v1/search",
                                 "/api/social_media/comments/v1/*",
                                 "/api/social_media/friends/v1/list",
-                                "/api/social_media/posts/v1/user"
+                                "/api/social_media/posts/v1/user",
+                                "/api/social_media/communities/v1/user"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.DELETE,

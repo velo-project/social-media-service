@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -49,5 +50,10 @@ public class CommunityMemberRepositoryImp implements ICommunityMemberRepository 
     public Optional<CommunityMemberEntity> findMember(Integer communityId, Integer userId) {
         return jpa.findByCommunityIdAndUserId(communityId, userId)
                 .map(CommunityMemberMapper::toDomain);
+    }
+
+    @Override
+    public List<CommunityMemberEntity> findByUserId(Integer userId) {
+        return jpa.findByUserId(userId).stream().map(CommunityMemberMapper::toDomain).toList();
     }
 }
