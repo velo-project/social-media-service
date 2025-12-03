@@ -5,7 +5,6 @@ import com.github.veloproject.socialmediaservices.application.commands.post.publ
 import com.github.veloproject.socialmediaservices.application.mediators.implementations.LoggingMediatorImp;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -25,7 +24,7 @@ public class PublishPostController {
     public ResponseEntity<PublishPostCommandResult> publishPost(
             @RequestParam @Valid @NotBlank @Size(max = 355) String content,
             @RequestParam(required = false) Integer postedIn,
-            @RequestPart(value = "image", required = false) MultipartFile image,
+            @RequestParam(value = "image", required = false) MultipartFile image,
             JwtAuthenticationToken token
     ) {
         var command =  new PublishPostCommand(content, postedIn, image);

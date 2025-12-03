@@ -73,7 +73,7 @@ public class PublishPostCommandHandler extends AuthRequestHandler<PublishPostCom
                         user.id());
                 post.setImageUrl(path);
             } catch (IOException e) {
-                throw new InternalErrorException("Error while reading image.");
+                throw new InternalErrorException("Erro ao processar imagem.");
             }
         }
 

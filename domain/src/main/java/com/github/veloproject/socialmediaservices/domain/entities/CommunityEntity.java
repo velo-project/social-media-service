@@ -14,6 +14,8 @@ public class CommunityEntity {
     private Integer id;
     private String name;
     private String description;
+    private String photoUrl;
+    private String bannerUrl;
     private float[] embeddings;
     @Setter(AccessLevel.PRIVATE)
     private Integer createdBy;
