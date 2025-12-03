@@ -5,7 +5,6 @@ import com.github.veloproject.socialmediaservices.application.queries.community_
 import com.github.veloproject.socialmediaservices.application.queries.community_member.get_user_communities.GetUserCommunitiesQueryResult;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ public class GetUserCommunitiesController {
 
     @GetMapping("/v1/user")
     public ResponseEntity<GetUserCommunitiesQueryResult> getMembersByCommunityId(
-            @PathParam("nickname") @Valid @NotBlank String nickname
+            @RequestParam @Valid @NotBlank String nickname
     ) {
         var query = new GetUserCommunitiesQuery(nickname);
         var response = mediator.send(query);
