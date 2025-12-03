@@ -1,5 +1,6 @@
 package com.github.veloproject.socialmediaservices.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class CommunityEntity {
     private String description;
     private String photoUrl;
     private String bannerUrl;
+    @JsonIgnore
     private float[] embeddings;
     @Setter(AccessLevel.PRIVATE)
     private Integer createdBy;
