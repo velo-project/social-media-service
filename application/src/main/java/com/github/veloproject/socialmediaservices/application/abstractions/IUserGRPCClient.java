@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface IUserGRPCClient {
     boolean existsByUserId(Integer userId);
+
     UserInfo getUserById(Integer userId);
+
     List<UserInfo> getUsersByIdList(List<Integer> ids);
+
+    UserInfo getUserByNickname(String nickname);
 }

@@ -21,7 +21,7 @@ public class GetFollowersByUserIdQueryHandler extends NoAuthRequestHandler<GetFo
         var pageRequest = PageRequest.of(
                 request.page(),
                 20,
-                Sort.by("followedAt").descending());
+                Sort.by("followedAt").ascending());
 
         var followers = followerRepository.findAllByUserId(request.userId(), pageRequest).toList();
 

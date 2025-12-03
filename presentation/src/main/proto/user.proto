@@ -10,14 +10,24 @@ service UserService {
   rpc UserExistsById (UserExistsByIdRequest) returns (UserExistsByIdResponse);
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
   rpc GetUsersByIdList (GetUsersByIdListRequest) returns (GetUsersByIdListResponse);
+  rpc GetUserByNickname (GetUserByNicknameRequest) returns (GetUserByNicknameResponse);
 }
 
+/* === IO === */
 message UserExistsByIdRequest {
   int32 id = 1;
 }
 
 message UserExistsByIdResponse {
   bool exists = 1;
+}
+
+message GetUserByNicknameRequest {
+  string nickname = 1;
+}
+
+message GetUserByNicknameResponse {
+  UserEntity user = 1;
 }
 
 message GetUserByIdRequest {

@@ -34,6 +34,32 @@ public class UserGRPCClient implements IUserGRPCClient {
     }
 
     @Override
+    public UserInfo getUserByNickname(String nickname) {
+        try {
+            GetUserByNicknameRequest request = GetUserByNicknameRequest.newBuilder().setNickname(nickname).build();
+            GetUserByNicknameResponse response = userServiceStub.getUserByNickname(request);
+            var user = response.getUser();
+
+            return new UserInfo(
+                    user.getId(),
+                    user.getName(),
+                    user.getNickname(),
+                    user.getBannerPhotoUrl(),
+                    user.getProfilePhotoUrl(),
+                    user.getIsBlocked(),
+                    user.getIsDeleted()
+            );
+        } catch (StatusRuntimeException e) {
+            if (e.getStatus().getCode() == Status.Code.NOT_FOUND) {
+                return null;
+            }
+            else {
+                throw e;
+            }
+        }
+    }
+
+    @Override
     public UserInfo getUserById(Integer userId) {
         try {
             GetUserByIdRequest request = GetUserByIdRequest.newBuilder().setId(userId).build();
